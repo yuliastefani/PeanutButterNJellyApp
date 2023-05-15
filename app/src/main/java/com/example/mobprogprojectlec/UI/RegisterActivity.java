@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 userHelper.open();
                 userHelper.insertUser(etRgUsername.getText().toString(),etRgEmail.getText().toString(),etRgPassword.getText().toString());
                 userHelper.close();
-                intent = new Intent(this,MainActivity.class);
+                intent = new Intent(this,LoginActivity.class);
                 startActivity(intent);
             }
         }

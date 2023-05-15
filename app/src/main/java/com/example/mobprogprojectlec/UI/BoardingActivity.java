@@ -20,7 +20,7 @@ public class BoardingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start main app activity
-                Intent intent = new Intent(BoardingActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(BoardingActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

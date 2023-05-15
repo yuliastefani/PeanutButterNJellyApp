@@ -3,6 +3,7 @@ package com.example.mobprogprojectlec.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         tvLgRegister.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
+        userHelper = new UserHelper(this);
 
     }
 
@@ -40,13 +42,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
         }
-        else if(v.getId()==R.id.btnRegister){
-            if(validate()==true){
-                userHelper.open();
-                userHelper.getUser(etLgUsername.getText().toString());
-                userHelper.close();
+        else if(v.getId()==R.id.btnLogin){
+            if(validate() == true){
+//                userHelper.open();
+//                userHelper.getUser(etLgUsername.getText().toString());
+//                userHelper.close();
+
                 intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
+                SharedPreferences sharedPreferences = getSharedPreferences("username",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("username",etLgUsername.getText().toString());
+                editor.commit();
             }
         }
     }
@@ -61,12 +68,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         userHelper.open();
         Boolean checkUser = userHelper.validateUser(etLgUsername.getText().toString(), etLgPassword.getText().toString());
         userHelper.close();
-        if (checkUser == true){
+        if (checkUser == false){
             etLgUsername.setError("Username and Password are not found, Please Register First!");
             return false;
         }
-        else{
-            return true;
-        }
+        return true;
     }
 }
