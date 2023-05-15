@@ -1,4 +1,4 @@
-package com.example.mobprogprojectlec;
+package com.example.mobprogprojectlec.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.mobprogprojectlec.R;
 
 public class BoardingActivity extends AppCompatActivity {
 
@@ -18,7 +20,7 @@ public class BoardingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start main app activity
-                Intent intent = new Intent(BoardingActivity.this, MainActivity.class);
+                Intent intent = new Intent(BoardingActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -7,23 +7,47 @@
     android:background="@android:color/white"
     android:gravity="center">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/peabut_n_jelly"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="10dp"/>
+
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to My App"
+        android:gravity="center"
+        android:text="Welcome to Peanut Butter n Jelly App"
         android:textSize="24sp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/brown_1"
+        android:layout_marginHorizontal="80dp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Cause Life is Sweet and Salty at the same time"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/tvWelcome"
+        android:textStyle="italic"
+        android:textColor="@color/brown_3"/>
 
     <Button
         android:id="@+id/btnGetStarted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="Get Started"
         android:textSize="18sp"
-        android:layout_below="@id/tvWelcome"
-        android:layout_marginTop="16dp"
+        android:layout_below="@id/tvDescription"
+        android:layout_marginTop="350dp"
         android:background="@drawable/rounded_button"
         android:textColor="@android:color/white" />
 

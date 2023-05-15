@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.RegisterActivity"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvLgTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/brown_1"/>
+
+    <TextView
+        android:id="@+id/tvLgDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login to Peanut Butter n Jelly App"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="italic"
+        android:textColor="@color/brown_3"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="50dp"
+        android:text="Username"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:textColor="@color/brown_1"/>
+
+    <EditText
+        android:id="@+id/etLgUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginHorizontal="40dp"
+        android:hint="Username"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColor="@color/brown_1"
+        android:textColorHint="@color/brown_3"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="50dp"
+        android:text="Password"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:textColor="@color/brown_1"/>
+
+    <EditText
+        android:id="@+id/etLgPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginHorizontal="40dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@color/brown_1"
+        android:textColorHint="@color/brown_3"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tvLgRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Don't have an account?"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:textColor="@color/brown_2"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Login"
+        android:textSize="18sp"
+        android:background="@drawable/rounded_button"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>
