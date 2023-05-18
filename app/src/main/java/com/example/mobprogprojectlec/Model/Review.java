@@ -6,12 +6,14 @@ public class Review {
     private String comment;
     private int userId;
     private int songId;
+    private int rating;
 
-    public Review(int id, String comment, int userId, int songId) {
+    public Review(int id, String comment, int userId, int songId, int rating) {
         this.id = id;
         this.comment = comment;
         this.userId = userId;
         this.songId = songId;
+        this.rating = rating;
     }
 
     public int getId() {
@@ -44,5 +46,13 @@ public class Review {
 
     public void setSongId(int songId) {
         this.songId = songId;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }

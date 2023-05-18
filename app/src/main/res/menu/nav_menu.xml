@@ -20,14 +20,19 @@
             android:title="Home" />
 
         <item
-            android:id="@+id/nav_review"
-            android:icon="@drawable/nav_review"
-            android:title="My Review" />
+            android:id="@+id/nav_artist"
+            android:icon="@drawable/nav_artist"
+            android:title="Artist" />
 
         <item
-            android:id="@+id/nav_acc"
-            android:icon="@drawable/nav_acc"
-            android:title="Account" />
+            android:id="@+id/nav_album"
+            android:icon="@drawable/nav_album"
+            android:title="Album" />
+
+        <item
+            android:id="@+id/nav_song"
+            android:icon="@drawable/nav_song"
+            android:title="Song List" />
 
         <item
             android:id="@+id/nav_about"
@@ -36,12 +41,6 @@
 
     </group>
 
-    <item
-        android:title="">
-    </item>
-    <item
-        android:title="">
-    </item>
     <item
         android:title="">
     </item>

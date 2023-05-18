@@ -120,9 +120,14 @@ public class UserHelper {
         tempUsername = cursor.getString(cursor.getColumnIndexOrThrow("username"));
         tempEmail = cursor.getString(cursor.getColumnIndexOrThrow("email"));
         tempPassword = cursor.getString(cursor.getColumnIndexOrThrow("password"));
-        u= new User(tempID, tempUsername, tempEmail, tempPassword);
+        u = new User(tempID, tempUsername, tempEmail, tempPassword);
 
         return u;
+    }
+
+    public void updateUser(String id,String username, String email, String password){
+        String update = "Update User set username = '"+username+"',email = '"+email+"', password = '"+password+"' where id = '"+id+"'";
+        db.execSQL(update);
     }
 
 

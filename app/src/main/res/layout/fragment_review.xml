@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ReviewFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UI.ReviewFragment"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tvNoReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Review Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
+        android:text="No Review yet!"
+        android:textSize="25dp"
+        android:layout_gravity="center_vertical|center_horizontal"
         android:textColor="@color/brown_2"/>
 
-</RelativeLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/pink_2"
+        app:tint="@color/white"
+        android:src="@drawable/ic_add"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

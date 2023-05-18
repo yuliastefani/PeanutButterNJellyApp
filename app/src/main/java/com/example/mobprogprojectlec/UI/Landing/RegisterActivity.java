@@ -1,4 +1,4 @@
-package com.example.mobprogprojectlec.UI;
+package com.example.mobprogprojectlec.UI.Landing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
         }
         else if(v.getId()==R.id.btnRegister){
-            if(validate()==true){
+            if(validate()){
                 userHelper.open();
                 userHelper.insertUser(etRgUsername.getText().toString(),etRgEmail.getText().toString(),etRgPassword.getText().toString());
                 userHelper.close();
@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         userHelper.open();
         Boolean checkUsername = userHelper.validateUsername(etRgUsername.getText().toString());
         userHelper.close();
-        if (checkUsername == true){
+        if (checkUsername){
             etRgUsername.setError("Username already exists!");
             return false;
         }

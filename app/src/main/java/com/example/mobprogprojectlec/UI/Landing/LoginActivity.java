@@ -1,4 +1,4 @@
-package com.example.mobprogprojectlec.UI;
+package com.example.mobprogprojectlec.UI.Landing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.mobprogprojectlec.Database.UserHelper;
 import com.example.mobprogprojectlec.R;
+import com.example.mobprogprojectlec.UI.Landing.RegisterActivity;
+import com.example.mobprogprojectlec.UI.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -48,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                userHelper.getUser(etLgUsername.getText().toString());
 //                userHelper.close();
 
-                intent = new Intent(this,MainActivity.class);
+                intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 SharedPreferences sharedPreferences = getSharedPreferences("username",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();

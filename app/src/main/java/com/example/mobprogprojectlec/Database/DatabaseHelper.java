@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(song);
         String user = "CREATE TABLE IF NOT EXISTS User(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username varchar(100), email varchar(100),password varchar(100))";
         db.execSQL(user);
-        String review = "CREATE TABLE IF NOT EXISTS Review(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, comment varchar(255), user_id int, song_id int, FOREIGN KEY(user_id) REFERENCES User(id), FOREIGN KEY(song_id) REFERENCES Song(id))";
+        String review = "CREATE TABLE IF NOT EXISTS Review(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, comment varchar(255), user_id int, song_id int, rating int, FOREIGN KEY(user_id) REFERENCES User(id), FOREIGN KEY(song_id) REFERENCES Song(id))";
         db.execSQL(review);
     }
 

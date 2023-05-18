@@ -1,44 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".UI.Landing.RegisterActivity"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:layout_constraintCircleRadius="20dp">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_close"
+        android:layout_gravity="right"
+        android:layout_margin="10dp"
+        android:onClick="closeDialog"
+        app:tint="@color/brown_1" />
 
     <TextView
-        android:id="@+id/tvRgTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Update Account"
+        android:textSize="30dp"
         android:gravity="center"
-        android:text="@string/app_name"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="@color/brown_1"/>
-
-    <TextView
-        android:id="@+id/tvRgDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register yourself to Peanut Butter n Jelly App"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        android:textStyle="italic"
-        android:textColor="@color/brown_3"/>
+        android:textColor="@color/brown_2"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginStart="95dp"
+            android:layout_marginStart="55dp"
             android:layout_marginTop="40dp"
             android:text="Username"
             android:textSize="18dp"
@@ -48,8 +44,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="40dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="40dp"
@@ -60,11 +55,11 @@
 
 
             <EditText
-                android:id="@+id/etRgUsername"
+                android:id="@+id/accUsernameEdt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
-                android:hint="Username"
+                android:hint="Update Username"
                 android:inputType="text"
                 android:textColor="@color/brown_1"
                 android:textColorHint="@color/brown_3"/>
@@ -76,13 +71,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginStart="95dp"
+            android:layout_marginStart="55dp"
             android:layout_marginTop="40dp"
             android:text="Email"
             android:textSize="18dp"
@@ -92,8 +88,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="40dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="40dp"
@@ -104,11 +99,11 @@
 
 
             <EditText
-                android:id="@+id/etRgEmail"
+                android:id="@+id/accEmailEdt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
-                android:hint="Email"
+                android:hint="Update Email"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/brown_1"
                 android:textColorHint="@color/brown_3"/>
@@ -120,13 +115,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginStart="95dp"
+            android:layout_marginStart="55dp"
             android:layout_marginTop="40dp"
             android:text="Password"
             android:textSize="18dp"
@@ -136,8 +132,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="40dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="40dp"
@@ -148,11 +143,11 @@
 
 
             <EditText
-                android:id="@+id/etRgPassword"
+                android:id="@+id/accPasswordEdt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
-                android:hint="Password"
+                android:hint="Update Password"
                 android:inputType="textPassword"
                 android:textColor="@color/brown_1"
                 android:textColorHint="@color/brown_3"/>
@@ -161,24 +156,13 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvRgLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Already have an account?"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        android:textColor="@color/brown_2"/>
-
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/updAccBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Register"
-        android:textSize="18sp"
-        android:background="@drawable/rounded_button"
-        android:textColor="@android:color/white"/>
+        android:layout_marginVertical="20dp"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:text="Update"/>
 
 </LinearLayout>

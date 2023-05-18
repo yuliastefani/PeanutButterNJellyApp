@@ -1,4 +1,4 @@
-package com.example.mobprogprojectlec.UI;
+package com.example.mobprogprojectlec.UI.NavBar;
 
 import android.os.Bundle;
 
