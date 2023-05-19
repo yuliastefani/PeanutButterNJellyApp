@@ -4,14 +4,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.NavBar.AboutFragment">
+    tools:context=".UI.NavBar.AboutFragment"
+    android:background="@color/pink_2">
+
+    <include layout="@layout/background_layout"/>
+
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/peabut_n_jelly"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/tvAboutUs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peanut Butter n Jelly"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="About Us Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvAboutUs"
+        android:text="Things you need to know about us"
+        android:textSize="15dp"
+        android:textStyle="italic"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About Us"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:textStyle="bold"
+        android:textColor="@color/brown_1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peanut Butter n Jelly is a mobile application that allows users to their review about their favourite song. The application also allows users to save their favorite songs and support the Artists as well."
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:textAlignment="center"
+        android:padding="20dp"
         android:textColor="@color/brown_2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Us"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="550dp"
+        android:textStyle="bold"
+        android:textColor="@color/brown_1"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="600dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="15dp">
+
+            <ImageView
+                android:id="@+id/iv_instagram"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_instagram"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Instagram"
+                android:textSize="15dp"
+                android:textColor="@color/brown_1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="15dp">
+
+            <ImageView
+                android:id="@+id/iv_facebook"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_facebook"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Facebook"
+                android:textSize="15dp"
+                android:textColor="@color/brown_1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="15dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_twitter"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twitter"
+                android:textSize="15dp"
+                android:textColor="@color/brown_1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
