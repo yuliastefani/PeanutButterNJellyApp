@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MobProgProjectLEC"
         tools:targetApi="31">
         <activity
-            android:name=".SongDetailActivity"
+            android:name=".UI.SongDetailActivity"
             android:exported="false" />
         <activity
             android:name=".UI.Landing.RegisterActivity"

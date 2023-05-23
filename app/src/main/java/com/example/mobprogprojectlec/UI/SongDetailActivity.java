@@ -1,4 +1,4 @@
-package com.example.mobprogprojectlec.UI.NavBar;
+package com.example.mobprogprojectlec.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,4 +13,7 @@ public class SongDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_detail);
     }
+
+
+
 }

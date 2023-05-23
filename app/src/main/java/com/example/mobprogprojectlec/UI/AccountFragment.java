@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mobprogprojectlec.Database.UserHelper;
@@ -23,6 +24,7 @@ public class AccountFragment extends Fragment {
     Button editAccBtn;
     TextView accUsername, accEmail, accPassword;
     EditText accUsernameEdt, accEmailEdt, accPasswordEdt;
+    ImageView closeDialog;
     User user;
     UserHelper userHelper;
     Dialog dialog;
@@ -59,10 +61,17 @@ public class AccountFragment extends Fragment {
                 accEmailEdt = dialog.findViewById(R.id.accEmailEdt);
                 accPasswordEdt = dialog.findViewById(R.id.accPasswordEdt);
                 Button updAccBtn = dialog.findViewById(R.id.updAccBtn);
+                closeDialog = dialog.findViewById(R.id.closeDialog);
 
                 updAccBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        closeDialog.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
                         if (validate()) {
                             userHelper.open();
                             userHelper.updateUser(String.valueOf(user.getId()),accUsernameEdt.getText().toString(),accEmailEdt.getText().toString(),accPasswordEdt.getText().toString());
