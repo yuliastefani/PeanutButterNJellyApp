@@ -15,5 +15,4 @@ public class SongDetailActivity extends AppCompatActivity {
     }
 
 
-
 }

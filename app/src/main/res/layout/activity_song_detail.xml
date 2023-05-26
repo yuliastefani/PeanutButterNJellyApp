@@ -7,19 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".UI.SongDetailActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@color/pink_2">
 
-        <include layout="@layout/background_layout" />
+            <ImageView
+                android:id="@+id/songImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/songName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:textColor="@color/brown_2"
+                android:textSize="20dp" />
 
+            <include layout="@layout/background_layout" />
 
-    </RelativeLayout>
+        </RelativeLayout>
 
 
 

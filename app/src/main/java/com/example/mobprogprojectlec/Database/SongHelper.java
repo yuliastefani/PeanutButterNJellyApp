@@ -40,7 +40,7 @@ public class SongHelper {
         cursor.moveToFirst();
 
         Song s;
-        String tempSongTitle, tempGenre;
+        String tempSongTitle, tempGenre, tempPreview;
         Integer tempID, tempArtistID, tempAlbumID;
 
         if (cursor.getCount() > 0) {
@@ -50,8 +50,9 @@ public class SongHelper {
                 tempArtistID = cursor.getInt(cursor.getColumnIndexOrThrow("artist_id"));
                 tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
                 tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
+                tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
 
-                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre);
+                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
 
                 songVector.add(s);
                 cursor.moveToNext();
@@ -73,7 +74,7 @@ public class SongHelper {
         }
 
         Song s;
-        String tempSongTitle, tempGenre;
+        String tempSongTitle, tempGenre, tempPreview;
         Integer tempID, tempArtistID, tempAlbumID;
 
         tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
@@ -81,13 +82,14 @@ public class SongHelper {
         tempArtistID = cursor.getInt(cursor.getColumnIndexOrThrow("artist_id"));
         tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
         tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
+        tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
 
-        s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre);
+        s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
 
         return s;
     }
 
-    public void insertData(String songTitle, String artistId, String albumId, String genre) {
+    public void insertData(String songTitle, String artistId, String albumId, String genre, String preview) {
         String insert = "Select id from Song";
         Cursor cursor = db.rawQuery(insert, null);
         ContentValues contentValues = new ContentValues();
@@ -99,6 +101,7 @@ public class SongHelper {
             contentValues.put("artist_id", artistId);
             contentValues.put("album_id", albumId);
             contentValues.put("genre", genre);
+            contentValues.put("preview", preview);
 
             db.insert(table, null, contentValues);
 
@@ -108,6 +111,7 @@ public class SongHelper {
             contentValues.put("artist_id", artistId);
             contentValues.put("album_id", albumId);
             contentValues.put("genre", genre);
+            contentValues.put("preview", preview);
 
             db.insert(table, null, contentValues);
         }

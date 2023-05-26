@@ -1,5 +1,6 @@
 package com.example.mobprogprojectlec.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -11,7 +12,7 @@ import java.util.Vector;
 
 public class ArtistHelper {
 
-    private static String table = "artist";
+    private static String table = "Artist";
     private Context ctx;
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase db;
@@ -59,27 +60,37 @@ public class ArtistHelper {
     public void insertArtist(String artistName, String artistDescription, String artistImage) {
         String insert = "Select id from Artist";
         Cursor cursor = db.rawQuery(insert, null);
+
+        ContentValues cv = new ContentValues();
+
         if (cursor != null && cursor.moveToLast()){
             int tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             tempID++;
-            insert = "Insert into Artist values (" + tempID + ", '" + artistName + "', '" + artistDescription + "', '" + artistImage + "')";
-            db.execSQL(insert);
+            cv.put("id", tempID);
+            cv.put("name", artistName);
+            cv.put("description", artistDescription);
+            cv.put("image", artistImage);
+
+            db.insert(table, null, cv);
         }
         else {
-            insert = "Insert into Artist values (1, '" + artistName + "', '" + artistDescription + "', '" + artistImage + "')";
-            db.execSQL(insert);
+            cv.put("id", 1);
+            cv.put("name", artistName);
+            cv.put("description", artistDescription);
+            cv.put("image", artistImage);
+
+            db.insert(table, null, cv);
         }
         cursor.close();
     }
 
-    public Artist getArtist(String artistName) {
+    public Artist getArtist(String artistId) {
         String view = "Select * from " + table + " where artistName=? limit 1";
 
-        Cursor cursor = db.rawQuery(view, new String[]{artistName});
+        Cursor cursor = db.rawQuery(view, new String[]{artistId});
 
         cursor.moveToFirst();
         if (cursor.getCount() <= 0) {
-            cursor.close();
             return null;
         }
 
@@ -93,8 +104,19 @@ public class ArtistHelper {
         tempArtistImage = cursor.getString(cursor.getColumnIndexOrThrow("image"));
 
         a = new Artist(tempID, tempArtistName, tempArtistDescription, tempArtistImage);
-        cursor.close();
         return a;
+    }
+
+    public Boolean validateArtist(String name){
+        String search = "Select * from " + table + " where name=?";
+
+        Cursor cursor = db.rawQuery(search, new String[]{name});
+        if (cursor.getCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }

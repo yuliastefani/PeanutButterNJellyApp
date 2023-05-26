@@ -1,6 +1,9 @@
 package com.example.mobprogprojectlec.Model;
 
-public class Artist{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Artist implements Parcelable{
     private int id;
     private String name;
     private String description;
@@ -12,6 +15,29 @@ public class Artist{
         this.description = description;
         this.image = image;
     }
+
+    protected Artist(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+        image = in.readString();
+        id = in.readInt();
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeString(image);
+        dest.writeInt(id);
+    }
+
+    public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+        public Artist createFromParcel(Parcel in) {
+            return new Artist(in);
+        }
+        public Artist[] newArray(int size) {
+            return new Artist[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -43,5 +69,9 @@ public class Artist{
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int describeContents() {
+        return 0;
     }
 }

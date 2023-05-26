@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/artistCV"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_width="wrap_content"
+    android:layout_height="225dp"
     app:cardElevation="20dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,52 +16,26 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="30dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/albumImage1"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:id="@+id/artistImage"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
             <TextView
-                android:id="@+id/artistName1"
-                android:layout_width="match_parent"
+                android:id="@+id/artistName"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_below="@id/albumImage1"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/artistImage"
                 android:textColor="@color/brown_2"
-                android:textSize="15dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="30dp"
-            android:layout_weight="1">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/albumImage2"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                app:shapeAppearanceOverlay="@style/RoundedImageView" />
-
-            <TextView
-                android:id="@+id/artistName2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_below="@id/albumImage2"
-                android:textColor="@color/brown_2"
-                android:textSize="15dp" />
+                android:gravity="center"
+                android:textSize="20dp" />
 
         </RelativeLayout>
 
     </LinearLayout>
-
-
 
 </androidx.cardview.widget.CardView>
