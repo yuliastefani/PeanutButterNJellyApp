@@ -21,7 +21,6 @@ import java.util.Vector;
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>{
 
     Context artistContent;
-    ArtistHelper artistHelper;
     Vector<Artist> vArtist;
 
     public ArtistAdapter(Context artistContent, Vector<Artist> vArtist) {

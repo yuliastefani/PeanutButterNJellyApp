@@ -57,16 +57,18 @@ public class ArtistHelper {
 
     }
 
-    public void insertArtist(String artistName, String artistDescription, String artistImage) {
-        String insert = "Select id from Artist";
+    public int insertArtist(String artistName, String artistDescription, String artistImage) {
+        String insert = "SELECT id FROM Artist";
         Cursor cursor = db.rawQuery(insert, null);
 
         ContentValues cv = new ContentValues();
 
+        int artistID;
         if (cursor != null && cursor.moveToLast()){
             int tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             tempID++;
-            cv.put("id", tempID);
+            artistID = tempID;
+            cv.put("id", artistID);
             cv.put("name", artistName);
             cv.put("description", artistDescription);
             cv.put("image", artistImage);
@@ -74,18 +76,22 @@ public class ArtistHelper {
             db.insert(table, null, cv);
         }
         else {
-            cv.put("id", 1);
+            artistID = 1;
+            cv.put("id", artistID);
             cv.put("name", artistName);
             cv.put("description", artistDescription);
             cv.put("image", artistImage);
 
             db.insert(table, null, cv);
         }
+
         cursor.close();
+        return artistID;
     }
 
+
     public Artist getArtist(String artistId) {
-        String view = "Select * from " + table + " where artistName=? limit 1";
+        String view = "Select * from " + table + " where name=? limit 1";
 
         Cursor cursor = db.rawQuery(view, new String[]{artistId});
 

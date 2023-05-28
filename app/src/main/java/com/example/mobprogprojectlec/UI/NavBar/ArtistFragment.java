@@ -46,7 +46,7 @@ public class ArtistFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String url = "https://mocki.io/v1/cc1678cb-a16c-40ca-b0fb-41bc33e3362c";
+        String url = "https://mocki.io/v1/a2a8b40c-80f1-4704-941d-9285c7f31b89";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

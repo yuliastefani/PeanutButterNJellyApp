@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mobprogprojectlec.Database.AlbumHelper;
 import com.example.mobprogprojectlec.Model.Album;
 import com.example.mobprogprojectlec.R;
@@ -20,7 +21,6 @@ import java.util.Vector;
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>{
 
     Context albumContent;
-    AlbumHelper albumHelper;
     Vector<Album> vAlbum;
 
     public AlbumAdapter(Context albumContent, Vector<Album> vAlbum) {
@@ -43,6 +43,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     public void onBindViewHolder(@NonNull AlbumAdapter.AlbumViewHolder holder, int position) {
         Album a = vAlbum.get(position);
         holder.albumName.setText(a.getName());
+        Glide.with(albumContent).load(a.getImage()).into(holder.albumImage);
         holder.albumCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +60,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
     @Override
     public int getItemCount() {
-        return 0;
+        return vAlbum.size();
     }
 
     public class AlbumViewHolder extends RecyclerView.ViewHolder {

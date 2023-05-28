@@ -63,15 +63,17 @@ public class AccountFragment extends Fragment {
                 Button updAccBtn = dialog.findViewById(R.id.updAccBtn);
                 closeDialog = dialog.findViewById(R.id.closeDialog);
 
+                closeDialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
                 updAccBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        closeDialog.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
+
                         if (validate()) {
                             userHelper.open();
                             userHelper.updateUser(String.valueOf(user.getId()),accUsernameEdt.getText().toString(),accEmailEdt.getText().toString(),accPasswordEdt.getText().toString());

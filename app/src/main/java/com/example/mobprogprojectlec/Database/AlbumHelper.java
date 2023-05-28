@@ -64,10 +64,12 @@ public class AlbumHelper {
         Cursor cursor = db.rawQuery(insert, null);
         ContentValues cv = new ContentValues();
 
+        int albumID;
         if (cursor != null && cursor.moveToLast()){
             int tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             tempID++;
-            cv.put("id", tempID + 1);
+            albumID = tempID;
+            cv.put("id", albumID);
             cv.put("name", albumName);
             cv.put("artist_id", artistID);
             cv.put("year", albumYear);
@@ -117,9 +119,9 @@ public class AlbumHelper {
 
     }
 
-    public Boolean validateAlbum(String albumName){
-        String view = "Select * from " + table + " where albumName= ?";
-        Cursor cursor = db.rawQuery(view, new String[]{albumName});
+    public Boolean validateAlbum(String name){
+        String view = "Select * from " + table + " where name= ?";
+        Cursor cursor = db.rawQuery(view, new String[]{name});
         
         if (cursor.getCount() <= 0) {
             return false;

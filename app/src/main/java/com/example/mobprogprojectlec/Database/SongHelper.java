@@ -120,7 +120,7 @@ public class SongHelper {
 
     }
 
-    public Boolean validateGame(String title) {
+    public Boolean validateSong(String title) {
         String search = "Select * from Song where title = ?";
         Cursor cursor = db.rawQuery(search, new String[]{title});
 
