@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.mobprogprojectlec.Model.Album;
+import com.example.mobprogprojectlec.Model.Artist;
 
 import java.util.Vector;
 
@@ -30,9 +31,9 @@ public class AlbumHelper {
         databaseHelper.close();
     }
 
-    public Vector<Album> vAlbum() {
+    public Vector<Album> viewAlbum() {
         Vector<Album> albumVector = new Vector<>();
-        String view = "Select * from " + table;
+        String view = "Select * from " + table + " ORDER BY name ASC";
         Cursor cursor = db.rawQuery(view, null);
         cursor.moveToFirst();
         Album a;
@@ -120,6 +121,30 @@ public class AlbumHelper {
             }
         }
 
+        return album;
+    }
+
+    public Album fetchAlbum(int albumID) {
+        String select = "Select * from Album where id= ? limit 1";
+        Cursor cursor = db.rawQuery(select, new String[]{String.valueOf(albumID)});
+
+        cursor.moveToFirst();
+        if (cursor.getCount() <= 0) {
+            return null;
+        }
+
+        Album album;
+        String tempAlbumName, tempAlbumDescription, tempAlbumImage;
+        Integer tempID, tempArtistID, tempAlbumYear;
+
+        tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+        tempAlbumName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+        tempArtistID = cursor.getInt(cursor.getColumnIndexOrThrow("artist_id"));
+        tempAlbumDescription = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+        tempAlbumImage = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+        tempAlbumYear = cursor.getInt(cursor.getColumnIndexOrThrow("year"));
+
+        album = new Album(tempID, tempAlbumName, tempArtistID, tempAlbumYear, tempAlbumDescription, tempAlbumImage);
         return album;
     }
 

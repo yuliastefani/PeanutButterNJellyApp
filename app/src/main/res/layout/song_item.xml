@@ -12,36 +12,47 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="0dp"
         android:orientation="horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/albumImage"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
         <TextView
             android:id="@+id/songName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
             android:layout_toEndOf="@id/albumImage"
             android:textColor="@color/brown_1"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/artistName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="40dp"
             android:layout_marginTop="70dp"
             android:layout_toEndOf="@id/albumImage"
             android:textColor="@color/brown_2"
             android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/nextBtn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_next"
+            app:tint="@color/pink_1" />
 
     </RelativeLayout>
 

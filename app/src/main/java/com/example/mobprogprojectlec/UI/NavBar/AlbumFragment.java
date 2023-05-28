@@ -33,7 +33,7 @@ public class AlbumFragment extends Fragment {
     private Vector<Album> vAlbums;
     private RecyclerView albumRecycleView;
     private AlbumHelper albumHelper;
-    private ArtistHelper artistHelper;
+    private AlbumAdapter albumAdapter;
 
     public AlbumFragment() {
         // Required empty public constructor
@@ -49,102 +49,17 @@ public class AlbumFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String albumurl = "https://mocki.io/v1/a2a8b40c-80f1-4704-941d-9285c7f31b89";
-
-        JsonObjectRequest albumRequest = new JsonObjectRequest(Request.Method.GET, albumurl, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        vAlbums = jsonParse(response);
-                        albumRecycleView = view.findViewById(R.id.albumRV);
-                        albumHelper = new AlbumHelper(getContext());
-                        albumHelper.open();
-                        vAlbums = albumHelper.vAlbum();
-                        albumHelper.close();
-
-                        AlbumAdapter albumAdapter = new AlbumAdapter(getContext(),vAlbums);
-                        albumRecycleView.setAdapter(albumAdapter);
-                        albumRecycleView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        Volley.newRequestQueue(getActivity().getApplicationContext()).add(albumRequest);
-    }
-
-    private Vector<Album> jsonParse(JSONObject response) {
-        initialize();
-        try {
-            JSONArray artistArray = response.getJSONArray("artist");
-
-            artistHelper = new ArtistHelper(getContext());
-            artistHelper.open();
-
-            albumHelper = new AlbumHelper(getContext());
-            albumHelper.open();
-
-            for (int i = 0; i < artistArray.length(); i++) {
-                JSONObject artistObject = artistArray.getJSONObject(i);
-                int artistID = insertArtist(artistObject);
-
-                JSONArray albumArray = artistObject.getJSONArray("album");
-                for (int j = 0; j < albumArray.length(); j++) {
-                    JSONObject albumObject = albumArray.getJSONObject(j);
-                    String name = albumObject.getString("name");
-                    int year = albumObject.getInt("year");
-                    String description = albumObject.getString("description");
-                    String image = albumObject.getString("image");
-
-                    if (!albumHelper.validateAlbum(name, artistID)) {
-                        albumHelper.insertAlbum(name, artistID, year, description, image);
-                    }
-                }
-            }
-
-            albumHelper.close();
-            artistHelper.close();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-
+        albumHelper = new AlbumHelper(getContext());
         albumHelper.open();
-        vAlbums = albumHelper.vAlbum();
+        vAlbums = albumHelper.viewAlbum();
         albumHelper.close();
 
-        return vAlbums;
+        albumRecycleView = view.findViewById(R.id.albumRV);
+        albumAdapter = new AlbumAdapter(getContext(), vAlbums);
+        albumRecycleView.setAdapter(albumAdapter);
+        albumRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+
     }
 
-
-
-
-    private int insertArtist(JSONObject artistObject) {
-        try {
-            String name = artistObject.getString("name");
-            String description = artistObject.getString("description");
-            String image = artistObject.getString("image");
-
-            artistHelper.open();
-            if (!artistHelper.validateArtist(name)) {
-                int artistID = artistHelper.insertArtist(name, description, image);
-                artistHelper.close();
-                return artistID;
-            } else {
-                Artist artist = artistHelper.getArtist(name);
-                artistHelper.close();
-                return artist.getId();
-            }
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-
-    private void initialize() {
-        Vector<Album> vAlbums = new Vector<>();
-    }
 }

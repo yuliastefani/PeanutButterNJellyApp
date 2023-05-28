@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String songUrl = "https://mocki.io/v1/a2a8b40c-80f1-4704-941d-9285c7f31b89";
+        String songUrl = "https://mocki.io/v1/f35d5c90-a8e9-4f0b-9154-5f4598226daa";
 
         songRecyclerView = view.findViewById(R.id.songRV);
         songHelper = new SongHelper(getContext());
@@ -89,8 +89,8 @@ public class HomeFragment extends Fragment {
                         songHelper.close();
 //
 //                        if (artist != null && album != null) {
-                        songRecyclerView.setAdapter(new SongAdapter(getContext(), vSong));
-                        songRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//                        songRecyclerView.setAdapter(new SongAdapter(getContext(), vSong));
+//                        songRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 //                        } else {
 //                            Toast.makeText(getContext(), "Artist or Album not found", Toast.LENGTH_SHORT).show();
 //                        }

@@ -55,27 +55,20 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     public void onBindViewHolder(@NonNull SongAdapter.SongViewHolder holder, int position) {
         Song s = vSong.get(position);
 
-        SharedPreferences localArtist = songContent.getSharedPreferences("name", Context.MODE_PRIVATE);
-        String dataArtist = localArtist.getString("name","");
+
         artistHelper = new ArtistHelper(songContent);
         artistHelper.open();
-        artist = artistHelper.getArtist(dataArtist);
+        artist = artistHelper.fetchArtist(s.getArtistId());
         artistHelper.close();
 
-        artist.getId();
-
-        SharedPreferences localAlbum = songContent.getSharedPreferences("image", Context.MODE_PRIVATE);
-        String dataAlbum = localAlbum.getString("image","");
         albumHelper = new AlbumHelper(songContent);
         albumHelper.open();
-        album = albumHelper.getAlbum(dataAlbum, artist.getId());
+        album = albumHelper.fetchAlbum(s.getAlbumId());
         albumHelper.close();
-
-        album.getId();
 
         songHelper = new SongHelper(songContent);
         songHelper.open();
-        vSong = songHelper.vSong(String.valueOf(artist.getId()), String.valueOf(album.getId()));
+        vSong = songHelper.viewSong();
         songHelper.close();
 
         holder.songName.setText(s.getTitle());

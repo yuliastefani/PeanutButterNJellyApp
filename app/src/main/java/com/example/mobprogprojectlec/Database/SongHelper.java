@@ -87,6 +87,36 @@ public class SongHelper {
         return cursor.getCount() > 0;
     }
 
+    public Vector<Song> viewSong() {
+        Vector<Song> songVector = new Vector<>();
+        String viewSong = "Select * from Song ORDER BY title ASC";
+        Cursor cursor = db.rawQuery(viewSong, null);
+
+        cursor.moveToFirst();
+
+        Song s;
+        String tempSongTitle, tempGenre, tempPreview;
+        Integer tempID, tempArtistID, tempAlbumID;
+
+        if (cursor.getCount() > 0) {
+            do {
+                tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                tempSongTitle = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+                tempArtistID = cursor.getInt(cursor.getColumnIndexOrThrow("artist_id"));
+                tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
+                tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
+                tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
+
+                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
+
+                songVector.add(s);
+                cursor.moveToNext();
+            } while (!cursor.isAfterLast());
+        }
+        cursor.close();
+        return songVector;
+    }
+
 
     public Vector<Song> vSong(String artist_Id, String album_Id) {
         Vector<Song> songVector = new Vector<>();

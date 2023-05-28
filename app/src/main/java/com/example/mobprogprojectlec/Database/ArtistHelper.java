@@ -31,7 +31,7 @@ public class ArtistHelper {
         databaseHelper.close();
     }
 
-    public Vector<Artist> vArtist() {
+    public Vector<Artist> viewArtist() {
         Vector<Artist> artistVector = new Vector<>();
         String view = "Select * from " + table;
         Cursor cursor = db.rawQuery(view, null);
@@ -88,6 +88,28 @@ public class ArtistHelper {
 
         cursor.close();
         return artistID;
+    }
+
+    public Artist fetchArtist(int artistID) {
+        String select = "Select * from Artist where id= ? limit 1";
+        Cursor cursor = db.rawQuery(select, new String[]{String.valueOf(artistID)});
+
+        cursor.moveToFirst();
+        if (cursor.getCount() <= 0) {
+            return null;
+        }
+
+        Artist artist;
+        String tempArtistName, tempArtistDescription, tempArtistImage;
+        Integer tempID;
+
+        tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+        tempArtistName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+        tempArtistDescription = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+        tempArtistImage = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+
+        artist = new Artist(tempID, tempArtistName, tempArtistDescription, tempArtistImage);
+        return artist;
     }
 
 
