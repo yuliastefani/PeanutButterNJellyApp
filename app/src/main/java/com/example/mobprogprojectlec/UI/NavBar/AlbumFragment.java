@@ -99,7 +99,7 @@ public class AlbumFragment extends Fragment {
                     String description = albumObject.getString("description");
                     String image = albumObject.getString("image");
 
-                    if (!albumHelper.validateAlbum(name)) {
+                    if (!albumHelper.validateAlbum(name, artistID)) {
                         albumHelper.insertAlbum(name, artistID, year, description, image);
                     }
                 }

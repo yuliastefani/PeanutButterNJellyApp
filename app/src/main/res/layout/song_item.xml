@@ -6,10 +6,11 @@
     android:layout_height="115dp"
     android:id="@+id/songCV"
     app:cardElevation="20dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp">
 
     <RelativeLayout
-        android:layout_width="375dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="20dp"
         android:orientation="horizontal">

@@ -59,75 +59,76 @@ public class AlbumHelper {
 
     }
 
-    public void insertAlbum(String albumName, Integer artistID, Integer albumYear, String albumDescription, String albumImage) {
-        String insert = "Select * from " + table;
+    public int insertAlbum(String albumName, Integer artistID, Integer albumYear, String albumDescription, String albumImage) {
+        String insert = "SELECT * FROM " + table;
         Cursor cursor = db.rawQuery(insert, null);
         ContentValues cv = new ContentValues();
 
-        int albumID;
-        if (cursor != null && cursor.moveToLast()){
+        int albumID = -1; // Initialize with a default value
+
+        if (cursor != null && cursor.moveToLast()) {
             int tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             tempID++;
             albumID = tempID;
-            cv.put("id", albumID);
-            cv.put("name", albumName);
-            cv.put("artist_id", artistID);
-            cv.put("year", albumYear);
-            cv.put("description", albumDescription);
-            cv.put("image", albumImage);
-
-            db.insert(table, null, cv);
-
-        }
-        else {
-            cv.put("id", 1);
-            cv.put("name", albumName);
-            cv.put("artist_id", artistID);
-            cv.put("year", albumYear);
-            cv.put("description", albumDescription);
-            cv.put("image", albumImage);
-
-            db.insert(table, null, cv);
+        } else {
+            albumID = 1;
         }
 
-        cursor.close();
+        cv.put("id", albumID);
+        cv.put("name", albumName);
+        cv.put("artist_id", artistID);
+        cv.put("year", albumYear);
+        cv.put("description", albumDescription);
+        cv.put("image", albumImage);
 
+        db.insert(table, null, cv);
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return albumID;
     }
 
-    public Album getAlbum(String albumId){
-        String view = "Select * from " + table + " where id = " + albumId;
-        Cursor cursor = db.rawQuery(view, null);
-        cursor.moveToFirst();
 
-        if (cursor.getCount() <= 0) {
-            return null;
+    public Album getAlbum(String albumName, int artistId) {
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        Album album = null;
+
+        try {
+            db = databaseHelper.getReadableDatabase();
+            String selection = "name=? AND artist_id=?";
+            String[] selectionArgs = {albumName, String.valueOf(artistId)};
+            cursor = db.query(table, null, selection, selectionArgs, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                int artistID = cursor.getInt(cursor.getColumnIndexOrThrow("artist_id"));
+                int year = cursor.getInt(cursor.getColumnIndexOrThrow("year"));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+                String image = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+                album = new Album(id, name, artistID, year, description, image);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (db != null) {
+                db.close();
+            }
         }
 
-        Album a;
-        String tempAlbumName, tempAlbumDescription, tempAlbumImage;
-        Integer tempID, tempArtistID, tempAlbumYear;
-
-        tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
-        tempAlbumName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-        tempArtistID = cursor.getInt(cursor.getColumnIndexOrThrow("artist_id"));
-        tempAlbumDescription = cursor.getString(cursor.getColumnIndexOrThrow("description"));
-        tempAlbumImage = cursor.getString(cursor.getColumnIndexOrThrow("image"));
-        tempAlbumYear = cursor.getInt(cursor.getColumnIndexOrThrow("year"));
-
-        a = new Album(tempID, tempAlbumName, tempArtistID, tempAlbumYear, tempAlbumDescription, tempAlbumImage);
-        return a;
-
+        return album;
     }
 
-    public Boolean validateAlbum(String name){
-        String view = "Select * from " + table + " where name= ?";
-        Cursor cursor = db.rawQuery(view, new String[]{name});
-        
-        if (cursor.getCount() <= 0) {
-            return false;
-        }
 
-        return true;
+    public boolean validateAlbum(String name, int artistId) {
+        String search = "SELECT * FROM " + table + " WHERE name = ? AND artist_id = ?";
+        Cursor cursor = db.rawQuery(search, new String[]{name, String.valueOf(artistId)});
+
+        return cursor.getCount() > 0;
     }
 
 }

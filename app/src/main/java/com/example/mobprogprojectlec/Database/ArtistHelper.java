@@ -16,6 +16,7 @@ public class ArtistHelper {
     private Context ctx;
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase db;
+    private ArtistHelper artistHelper;
 
     public ArtistHelper(Context ctx) {
         this.ctx = ctx;
@@ -90,28 +91,38 @@ public class ArtistHelper {
     }
 
 
-    public Artist getArtist(String artistId) {
-        String view = "Select * from " + table + " where name=? limit 1";
+    public Artist getArtist(String artistName) {
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        Artist artist = null;
 
-        Cursor cursor = db.rawQuery(view, new String[]{artistId});
+        try {
+            db = databaseHelper.getReadableDatabase();
+            String selection = "name=?";
+            String[] selectionArgs = {artistName};
+            cursor = db.query(table, null, selection, selectionArgs, null, null, null);
 
-        cursor.moveToFirst();
-        if (cursor.getCount() <= 0) {
-            return null;
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+                String image = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+                artist = new Artist(id, name, description, image);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (db != null) {
+                db.close();
+            }
         }
 
-        Artist a;
-        String tempArtistName, tempArtistDescription, tempArtistImage;
-        Integer tempID;
-
-        tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
-        tempArtistName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-        tempArtistDescription = cursor.getString(cursor.getColumnIndexOrThrow("description"));
-        tempArtistImage = cursor.getString(cursor.getColumnIndexOrThrow("image"));
-
-        a = new Artist(tempID, tempArtistName, tempArtistDescription, tempArtistImage);
-        return a;
+        return artist;
     }
+
+
+
 
     public Boolean validateArtist(String name){
         String search = "Select * from " + table + " where name=?";

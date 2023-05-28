@@ -30,39 +30,6 @@ public class SongHelper {
         databaseHelper.close();
     }
 
-    public Vector<Song> vSong(){
-        Vector<Song> songVector = new Vector<>();
-
-        String view = "Select * from " + table;
-
-        Cursor cursor = db.rawQuery(view, null);
-
-        cursor.moveToFirst();
-
-        Song s;
-        String tempSongTitle, tempGenre, tempPreview;
-        Integer tempID, tempArtistID, tempAlbumID;
-
-        if (cursor.getCount() > 0) {
-            do {
-                tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
-                tempSongTitle = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-                tempArtistID = cursor.getInt(cursor.getColumnIndexOrThrow("artist_id"));
-                tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
-                tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
-                tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
-
-                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
-
-                songVector.add(s);
-                cursor.moveToNext();
-
-            } while (!cursor.isAfterLast());
-        }
-        cursor.close();
-        return songVector;
-    }
-
     public Song getSong(String songId) {
         String view = "Select * from Song where id= ? limit 1";
 
@@ -89,47 +56,69 @@ public class SongHelper {
         return s;
     }
 
-    public void insertData(String songTitle, String artistId, String albumId, String genre, String preview) {
-        String insert = "Select id from Song";
-        Cursor cursor = db.rawQuery(insert, null);
+    public void insertSong(String songTitle, Integer artistId, Integer albumId, String genre, String preview) {
+        String selectMaxIdQuery = "SELECT MAX(id) FROM Song";
+        Cursor cursor = db.rawQuery(selectMaxIdQuery, null);
+        int maxId = 0;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            maxId = cursor.getInt(0);
+            cursor.close();
+        }
+
+        int songId = maxId + 1;
+
         ContentValues contentValues = new ContentValues();
-        if (cursor != null && cursor.moveToLast()) {
-            int tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
-            tempID++;
-            contentValues.put("id", tempID);
-            contentValues.put("title", songTitle);
-            contentValues.put("artist_id", artistId);
-            contentValues.put("album_id", albumId);
-            contentValues.put("genre", genre);
-            contentValues.put("preview", preview);
+        contentValues.put("id", songId);
+        contentValues.put("title", songTitle);
+        contentValues.put("artist_id", artistId);
+        contentValues.put("album_id", albumId);
+        contentValues.put("genre", genre);
+        contentValues.put("preview", preview);
 
-            db.insert(table, null, contentValues);
+        db.insert(table, null, contentValues);
+    }
 
-        }else {
-            contentValues.put("id", 1);
-            contentValues.put("title", songTitle);
-            contentValues.put("artist_id", artistId);
-            contentValues.put("album_id", albumId);
-            contentValues.put("genre", genre);
-            contentValues.put("preview", preview);
 
-            db.insert(table, null, contentValues);
+    public boolean validateSong(String title, int artistId, int albumId) {
+        String search = "SELECT * FROM Song WHERE title = ? AND artist_id = ? AND album_id = ?";
+        Cursor cursor = db.rawQuery(search, new String[]{title, String.valueOf(artistId), String.valueOf(albumId)});
+
+        return cursor.getCount() > 0;
+    }
+
+
+    public Vector<Song> vSong(String artist_Id, String album_Id) {
+        Vector<Song> songVector = new Vector<>();
+        String viewSong = "Select * from Song where artist_id = ? and album_id = ?";
+        Cursor cursor = db.rawQuery(viewSong, new String[]{artist_Id, album_Id});
+
+        cursor.moveToFirst();
+
+        Song s;
+        String tempSongTitle, tempGenre, tempPreview;
+        Integer tempID, tempArtistID, tempAlbumID;
+
+        if (cursor.getCount() > 0) {
+            do {
+                tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                tempSongTitle = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+                tempArtistID = cursor.getInt(cursor.getColumnIndexOrThrow("artist_id"));
+                tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
+                tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
+                tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
+
+                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
+
+                songVector.add(s);
+                cursor.moveToNext();
+
+            } while (!cursor.isAfterLast());
         }
 
         cursor.close();
+        return songVector;
 
-    }
-
-    public Boolean validateSong(String title) {
-        String search = "Select * from Song where title = ?";
-        Cursor cursor = db.rawQuery(search, new String[]{title});
-
-        if (cursor.getCount() > 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 
 
