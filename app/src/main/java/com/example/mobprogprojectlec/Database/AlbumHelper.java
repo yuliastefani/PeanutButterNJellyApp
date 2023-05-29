@@ -60,6 +60,7 @@ public class AlbumHelper {
 
     }
 
+
     public int insertAlbum(String albumName, Integer artistID, Integer albumYear, String albumDescription, String albumImage) {
         String insert = "SELECT * FROM " + table;
         Cursor cursor = db.rawQuery(insert, null);
@@ -89,6 +90,35 @@ public class AlbumHelper {
         }
 
         return albumID;
+    }
+
+    public Vector<Album> viewAlbumbyID(int artistID) {
+        Vector<Album> albumVector = new Vector<>();
+        String view = "Select * from " + table + " WHERE artist_id = ? ORDER BY name ASC";
+        Cursor cursor = db.rawQuery(view, new String[]{String.valueOf(artistID)});
+        cursor.moveToFirst();
+        Album a;
+        String tempAlbumName, tempAlbumDescription, tempAlbumImage;
+        Integer tempID, tempArtistID, tempAlbumYear;
+
+        if (cursor.getCount() > 0) {
+            do {
+                tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                tempAlbumName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                tempArtistID = cursor.getInt(cursor.getColumnIndexOrThrow("artist_id"));
+                tempAlbumDescription = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+                tempAlbumImage = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+                tempAlbumYear = cursor.getInt(cursor.getColumnIndexOrThrow("year"));
+
+                a = new Album(tempID, tempAlbumName, tempArtistID, tempAlbumYear, tempAlbumDescription, tempAlbumImage);
+                albumVector.add(a);
+                cursor.moveToNext();
+            } while (!cursor.isAfterLast());
+        }
+
+        cursor.close();
+        return albumVector;
+
     }
 
 

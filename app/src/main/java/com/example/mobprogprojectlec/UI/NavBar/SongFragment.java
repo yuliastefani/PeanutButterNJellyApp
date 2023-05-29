@@ -60,22 +60,6 @@ public class SongFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initialize();
 
-//        SharedPreferences artistshared = getContext().getSharedPreferences("name", Context.MODE_PRIVATE);
-//        String artistName = artistshared.getString("name", "");
-//        artistHelper = new ArtistHelper(getContext());
-//        artistHelper.open();
-//        artist = artistHelper.getArtist(artistName);
-//        artistHelper.close();
-//        artist.getId();
-//
-//        SharedPreferences albumShared = getContext().getSharedPreferences("image", Context.MODE_PRIVATE);
-//        String albumImage = albumShared.getString("image", "");
-//        albumHelper = new AlbumHelper(getContext());
-//        albumHelper.open();
-//        album = albumHelper.getAlbum(albumImage, artist.getId());
-//        albumHelper.close();
-//        album.getId();
-
         songHelper = new SongHelper(getContext());
         songHelper.open();
         vSong = songHelper.viewSong();

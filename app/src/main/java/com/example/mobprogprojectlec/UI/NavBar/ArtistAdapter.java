@@ -1,6 +1,7 @@
 package com.example.mobprogprojectlec.UI.NavBar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.mobprogprojectlec.Database.ArtistHelper;
 import com.example.mobprogprojectlec.Model.Artist;
 import com.example.mobprogprojectlec.R;
+import com.example.mobprogprojectlec.UI.ArtistDetailActivity;
 
 import java.util.Vector;
 
@@ -48,10 +50,9 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         holder.artistCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(artistContent, ArtistDetail.class);
-                //intent.putExtra("artistName",a.getName());
-                //intent.putExtra("artistImage",a.getImage());
-                //artistContent.startActivity(intent);
+                Intent detailArtistIntent = new Intent(artistContent, ArtistDetailActivity.class);
+                detailArtistIntent.putExtra(ArtistDetailActivity.detArtist, vArtist.get(position));
+                artistContent.startActivity(detailArtistIntent);
             }
         });
     }

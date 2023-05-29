@@ -76,4 +76,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
             albumCV = itemView.findViewById(R.id.albumCV);
         }
     }
+
+    private Vector<Album> filterAlbumsByArtist(Vector<Album> albums, int artistID) {
+        Vector<Album> filteredAlbums = new Vector<>();
+        for (Album album : albums) {
+            if (album.getArtistId() == artistID) {
+                filteredAlbums.add(album);
+            }
+        }
+        return filteredAlbums;
+    }
 }
