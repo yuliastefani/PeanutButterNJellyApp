@@ -71,7 +71,9 @@ public class ArtistDetailActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Artist Detail");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        else {
+            setTitle("Artist Detail");
         }
 
     }

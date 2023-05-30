@@ -19,6 +19,9 @@
             android:label="Detail Artist"
             android:theme="@style/Theme.MobProgProjectLEC"/>
         <activity
+            android:name=".UI.AlbumDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.SongDetailActivity"
             android:exported="false" />
         <activity

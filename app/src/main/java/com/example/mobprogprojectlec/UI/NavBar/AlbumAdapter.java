@@ -1,6 +1,7 @@
 package com.example.mobprogprojectlec.UI.NavBar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.mobprogprojectlec.Database.AlbumHelper;
 import com.example.mobprogprojectlec.Model.Album;
 import com.example.mobprogprojectlec.R;
+import com.example.mobprogprojectlec.UI.AlbumDetailActivity;
 
 import java.util.Vector;
 
@@ -47,13 +49,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         holder.albumCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(albumContent, AlbumDetail.class);
-                //intent.putExtra("albumName",a.getName());
-                //intent.putExtra("albumArtist",a.getArtist());
-                //intent.putExtra("albumYear",a.getYear());
-                //intent.putExtra("albumGenre",a.getGenre());
-                //intent.putExtra("albumDesc",a.getDescription());
-                //albumContent.startActivity(intent);
+                Intent detailAlbumIntent = new Intent(albumContent, AlbumDetailActivity.class);
+                detailAlbumIntent.putExtra(AlbumDetailActivity.detAlbum, vAlbum.get(position));
+                albumContent.startActivity(detailAlbumIntent);
             }
         });
     }
@@ -77,13 +75,4 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         }
     }
 
-    private Vector<Album> filterAlbumsByArtist(Vector<Album> albums, int artistID) {
-        Vector<Album> filteredAlbums = new Vector<>();
-        for (Album album : albums) {
-            if (album.getArtistId() == artistID) {
-                filteredAlbums.add(album);
-            }
-        }
-        return filteredAlbums;
-    }
 }

@@ -55,7 +55,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     public void onBindViewHolder(@NonNull SongAdapter.SongViewHolder holder, int position) {
         Song s = vSong.get(position);
 
-
         artistHelper = new ArtistHelper(songContent);
         artistHelper.open();
         artist = artistHelper.fetchArtist(s.getArtistId());
@@ -65,11 +64,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         albumHelper.open();
         album = albumHelper.fetchAlbum(s.getAlbumId());
         albumHelper.close();
-
-        songHelper = new SongHelper(songContent);
-        songHelper.open();
-        vSong = songHelper.viewSong();
-        songHelper.close();
 
         holder.songName.setText(s.getTitle());
         holder.artistName.setText(artist.getName());
