@@ -13,7 +13,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.mobprogprojectlec.Database.AlbumHelper;
 import com.example.mobprogprojectlec.Model.Album;
 import com.example.mobprogprojectlec.R;
 import com.example.mobprogprojectlec.UI.AlbumDetailActivity;
@@ -46,13 +45,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         Album a = vAlbum.get(position);
         holder.albumName.setText(a.getName());
         Glide.with(albumContent).load(a.getImage()).into(holder.albumImage);
-        holder.albumCV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent detailAlbumIntent = new Intent(albumContent, AlbumDetailActivity.class);
-                detailAlbumIntent.putExtra(AlbumDetailActivity.detAlbum, vAlbum.get(position));
-                albumContent.startActivity(detailAlbumIntent);
-            }
+        holder.albumCV.setOnClickListener(v -> {
+            Intent detailAlbumIntent = new Intent(albumContent, AlbumDetailActivity.class);
+            detailAlbumIntent.putExtra(AlbumDetailActivity.detAlbum, vAlbum.get(position));
+            albumContent.startActivity(detailAlbumIntent);
         });
     }
 

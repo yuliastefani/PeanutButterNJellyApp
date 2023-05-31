@@ -6,9 +6,9 @@ public class Review {
     private String comment;
     private int userId;
     private int songId;
-    private int rating;
+    private float rating;
 
-    public Review(int id, String comment, int userId, int songId, int rating) {
+    public Review(int id, String comment, int userId, int songId, float rating) {
         this.id = id;
         this.comment = comment;
         this.userId = userId;
@@ -48,11 +48,11 @@ public class Review {
         this.songId = songId;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 }

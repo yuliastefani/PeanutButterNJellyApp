@@ -16,11 +16,15 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Theme.MobProgProjectLEC.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+<!--    <style name="Theme.MobProgProjectLEC.NoActionBar">-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--    </style>-->
     <style name="Theme.MobProgProjectLEC.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.MobProgProjectLEC.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name = "colorControlNormal">@color/white</item>
+        <item name ="colorControlActivated">@color/yellow</item>
+    </style>
 </resources>

@@ -60,7 +60,7 @@ public class ReviewHelper {
         return reviewVector;
     }
 
-    public void insertReview(String comment, int userId, int songId, int rating) {
+    public void insertReview(String comment, int userId, int songId, float rating) {
         String insert = "Select id from Review";
 
         Cursor cursor = db.rawQuery(insert, null);
@@ -77,7 +77,7 @@ public class ReviewHelper {
         cursor.close();
     }
 
-    public void updateReview(int id, String comment, int userId, int songId, int rating) {
+    public void updateReview(int id, String comment, int userId, int songId, float rating) {
         String update = "Update Review set comment = '" + comment + "', user_id = " + userId + ", song_id = " + songId + ", rating = " + rating + " where id = " + id;
         db.execSQL(update);
     }

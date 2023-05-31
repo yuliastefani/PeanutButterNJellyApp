@@ -1,7 +1,7 @@
 package com.example.mobprogprojectlec.UI.NavBar;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mobprogprojectlec.Database.AlbumHelper;
 import com.example.mobprogprojectlec.Database.ArtistHelper;
-import com.example.mobprogprojectlec.Database.SongHelper;
 import com.example.mobprogprojectlec.Model.Album;
 import com.example.mobprogprojectlec.Model.Artist;
 import com.example.mobprogprojectlec.Model.Song;
 import com.example.mobprogprojectlec.R;
+import com.example.mobprogprojectlec.UI.SongDetailActivity;
 
 import java.util.Vector;
 
@@ -30,7 +30,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     private ArtistHelper artistHelper;
     private AlbumHelper albumHelper;
-    private SongHelper songHelper;
 
     Artist artist;
     Album album;
@@ -68,17 +67,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         holder.songName.setText(s.getTitle());
         holder.artistName.setText(artist.getName());
         Glide.with(songContent).load(album.getImage()).into(holder.albumImage);
-        holder.songCV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(songContent, SongDetail.class);
-                //intent.putExtra("songName",s.getName());
-                //intent.putExtra("songArtist",s.getArtist());
-                //intent.putExtra("songYear",s.getYear());
-                //intent.putExtra("songGenre",s.getGenre());
-                //intent.putExtra("songDesc",s.getDescription());
-                //songContent.startActivity(intent);
-            }
+        holder.songCV.setOnClickListener(v -> {
+            Intent songIntent = new Intent(songContent, SongDetailActivity.class);
+            songIntent.putExtra(SongDetailActivity.detSong, vSong.get(position));
+            songContent.startActivity(songIntent);
         });
     }
 

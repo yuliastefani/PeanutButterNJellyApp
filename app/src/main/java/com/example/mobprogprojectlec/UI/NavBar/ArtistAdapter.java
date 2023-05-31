@@ -13,7 +13,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.mobprogprojectlec.Database.ArtistHelper;
 import com.example.mobprogprojectlec.Model.Artist;
 import com.example.mobprogprojectlec.R;
 import com.example.mobprogprojectlec.UI.ArtistDetailActivity;
@@ -47,13 +46,10 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         Artist a = vArtist.get(position);
         holder.artistName.setText(a.getName());
         Glide.with(artistContent).load(a.getImage()).into(holder.artistImage);
-        holder.artistCV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent detailArtistIntent = new Intent(artistContent, ArtistDetailActivity.class);
-                detailArtistIntent.putExtra(ArtistDetailActivity.detArtist, vArtist.get(position));
-                artistContent.startActivity(detailArtistIntent);
-            }
+        holder.artistCV.setOnClickListener(v -> {
+            Intent detailArtistIntent = new Intent(artistContent, ArtistDetailActivity.class);
+            detailArtistIntent.putExtra(ArtistDetailActivity.detArtist, vArtist.get(position));
+            artistContent.startActivity(detailArtistIntent);
         });
     }
 
