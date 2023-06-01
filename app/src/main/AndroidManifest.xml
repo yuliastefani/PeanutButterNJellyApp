@@ -14,15 +14,15 @@
         android:theme="@style/Theme.MobProgProjectLEC"
         tools:targetApi="31">
         <activity
-            android:name=".UI.ArtistDetailActivity"
+            android:name=".UI.NavBar.ArtistDetailActivity"
             android:exported="false"
             android:label="Detail Artist"
             android:theme="@style/Theme.MobProgProjectLEC"/>
         <activity
-            android:name=".UI.AlbumDetailActivity"
+            android:name=".UI.NavBar.AlbumDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.SongDetailActivity"
+            android:name=".UI.NavBar.SongDetailActivity"
             android:exported="false" />
         <activity
             android:name=".UI.Landing.RegisterActivity"

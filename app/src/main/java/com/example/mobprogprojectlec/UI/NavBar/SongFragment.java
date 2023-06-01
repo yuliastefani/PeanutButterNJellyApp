@@ -36,13 +36,8 @@ import java.util.Vector;
 public class SongFragment extends Fragment {
 
     private SongHelper songHelper;
-    private ArtistHelper artistHelper;
-    private AlbumHelper albumHelper;
     private Vector<Song> vSong;
     private RecyclerView songRecyclerView;
-
-    private Artist artist;
-    private Album album;
 
     public SongFragment() {
         // Required empty public constructor

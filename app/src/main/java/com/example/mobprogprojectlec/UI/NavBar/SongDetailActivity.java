@@ -1,4 +1,4 @@
-package com.example.mobprogprojectlec.UI;
+package com.example.mobprogprojectlec.UI.NavBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 

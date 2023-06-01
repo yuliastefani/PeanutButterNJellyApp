@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="56dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.ReviewFragment"
-    android:orientation="vertical">
+    tools:context=".UI.ReviewFragment">
 
-    <TextView
-        android:id="@+id/tvNoReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No Review yet!"
-        android:textSize="25dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:textColor="@color/brown_2"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reviewRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/review_item"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="100dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/pink_2"
-        app:tint="@color/white"
-        android:src="@drawable/ic_add"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tvNoReview"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="No Review yet!"-->
+<!--        android:textSize="25dp"-->
+<!--        android:layout_gravity="center_vertical|center_horizontal"-->
+<!--        android:textColor="@color/brown_2"/>-->
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_marginBottom="100dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:backgroundTint="@color/pink_2"-->
+<!--        app:tint="@color/white"-->
+<!--        android:src="@drawable/ic_add"/>-->
+
+</FrameLayout>

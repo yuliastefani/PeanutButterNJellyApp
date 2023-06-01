@@ -19,7 +19,6 @@ import com.example.mobprogprojectlec.Model.Album;
 import com.example.mobprogprojectlec.Model.Artist;
 import com.example.mobprogprojectlec.Model.Song;
 import com.example.mobprogprojectlec.R;
-import com.example.mobprogprojectlec.UI.SongDetailActivity;
 
 import java.util.Vector;
 
@@ -36,10 +35,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     public SongAdapter(Context songContent, Vector<Song> vSong) {
         this.songContent = songContent;
-        this.vSong = vSong;
-    }
-
-    public void setvSong(Vector<Song> vSong) {
         this.vSong = vSong;
     }
 

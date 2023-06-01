@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mobprogprojectlec.Model.Artist;
 import com.example.mobprogprojectlec.R;
-import com.example.mobprogprojectlec.UI.ArtistDetailActivity;
 
 import java.util.Vector;
 

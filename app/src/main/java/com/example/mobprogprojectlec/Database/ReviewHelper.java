@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.mobprogprojectlec.Model.Album;
 import com.example.mobprogprojectlec.Model.Review;
 
 import java.util.Vector;
@@ -52,6 +53,34 @@ public class ReviewHelper {
 
                 r = new Review(tempID, tempComment, tempUser, tempSong, tempRating);
 
+                reviewVector.add(r);
+                cursor.moveToNext();
+            } while (!cursor.isAfterLast());
+        }
+        cursor.close();
+        return reviewVector;
+    }
+
+    public Vector<Review> viewReview() {
+        Vector<Review> reviewVector = new Vector<>();
+        String view = "Select * from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(view, null);
+        cursor.moveToFirst();
+
+        Review r;
+        String tempComment, songName, albumName;
+        Integer tempID, tempUser, tempSong;
+        Float tempRating;
+
+        if (cursor.getCount() > 0) {
+            do {
+                tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                tempComment = cursor.getString(cursor.getColumnIndexOrThrow("comment"));
+                tempUser = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
+                tempSong = cursor.getInt(cursor.getColumnIndexOrThrow("song_id"));
+                tempRating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
+
+                r = new Review(tempID, tempComment, tempUser, tempSong, tempRating);
                 reviewVector.add(r);
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
