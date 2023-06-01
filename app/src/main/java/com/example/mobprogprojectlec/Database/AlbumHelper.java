@@ -31,9 +31,9 @@ public class AlbumHelper {
         databaseHelper.close();
     }
 
-    public Vector<Album> viewAlbum() {
+    public Vector<Album> viewAlbum(String orderByTable, String orderBy) {
         Vector<Album> albumVector = new Vector<>();
-        String view = "Select * from " + table + " ORDER BY name ASC";
+        String view = "Select * from " + table + " ORDER BY " + orderByTable + " " + orderBy;
         Cursor cursor = db.rawQuery(view, null);
         cursor.moveToFirst();
         Album a;

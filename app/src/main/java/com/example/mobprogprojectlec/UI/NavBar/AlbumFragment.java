@@ -51,7 +51,7 @@ public class AlbumFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         albumHelper = new AlbumHelper(getContext());
         albumHelper.open();
-        vAlbums = albumHelper.viewAlbum();
+        vAlbums = albumHelper.viewAlbum("year", "DESC");
         albumHelper.close();
 
         albumRecycleView = view.findViewById(R.id.albumRV);

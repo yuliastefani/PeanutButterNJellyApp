@@ -4,14 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="56dp"
     tools:context=".UI.HomeFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
-        android:textColor="@color/brown_2"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/allArtist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="All Artist →"
+                android:textColor="@color/brown_1"
+                android:textSize="30dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/artistRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/allArtist"
+                android:padding="10dp"
+                android:scrollbars="horizontal"
+                tools:listitem="@layout/artist_item" />
+
+            <TextView
+                android:id="@+id/allAlbum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All Album →"
+                android:textSize="30dp"
+                android:layout_below="@+id/artistRV"
+                android:layout_margin="20dp"
+                android:textColor="@color/brown_1"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/albumRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/allAlbum"
+                android:padding="10dp"
+                android:scrollbars="horizontal"
+                tools:listitem="@layout/album_item" />
+
+            <TextView
+                android:id="@+id/allSong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All Song →"
+                android:textSize="30dp"
+                android:layout_below="@+id/albumRV"
+                android:layout_margin="20dp"
+                android:textColor="@color/brown_1"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/songRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/allSong"
+                android:padding="10dp"
+                android:scrollbars="horizontal"
+                tools:listitem="@layout/song_item" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
 
 </RelativeLayout>
