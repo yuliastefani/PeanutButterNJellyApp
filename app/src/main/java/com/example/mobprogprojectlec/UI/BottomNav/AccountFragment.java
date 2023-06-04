@@ -1,4 +1,4 @@
-package com.example.mobprogprojectlec.UI;
+package com.example.mobprogprojectlec.UI.BottomNav;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.mobprogprojectlec.Database.UserHelper;
 import com.example.mobprogprojectlec.Model.User;
@@ -28,6 +29,7 @@ public class AccountFragment extends Fragment {
     User user;
     UserHelper userHelper;
     Dialog dialog;
+    ToggleButton viewPasswordBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,6 +41,7 @@ public class AccountFragment extends Fragment {
         accUsername = accountFragment.findViewById(R.id.accUsername);
         accEmail = accountFragment.findViewById(R.id.accEmail);
         accPassword = accountFragment.findViewById(R.id.accPassword);
+        viewPasswordBtn = accountFragment.findViewById(R.id.togglePassword);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("username",getActivity().MODE_PRIVATE);
         String username = sharedPreferences.getString("username","");
@@ -49,7 +52,18 @@ public class AccountFragment extends Fragment {
 
         accUsername.setText(user.getUsername());
         accEmail.setText(user.getEmail());
-        accPassword.setText(user.getPassword());
+        accPassword.setText("********");
+
+        viewPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewPasswordBtn.isChecked()) {
+                    accPassword.setText(user.getPassword());
+                } else {
+                    accPassword.setText("********");
+                }
+            }
+        });
 
         editAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +76,16 @@ public class AccountFragment extends Fragment {
                 accPasswordEdt = dialog.findViewById(R.id.accPasswordEdt);
                 Button updAccBtn = dialog.findViewById(R.id.updAccBtn);
                 closeDialog = dialog.findViewById(R.id.closeDialog);
+
+                userHelper.open();
+                String usernameText = userHelper.getUser(username).getUsername();
+                String emailText = userHelper.getUser(username).getEmail();
+                String passwordText = userHelper.getUser(username).getPassword();
+                userHelper.close();
+
+                accUsernameEdt.setText(usernameText);
+                accEmailEdt.setText(emailText);
+                accPasswordEdt.setText(passwordText);
 
                 closeDialog.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -76,15 +100,11 @@ public class AccountFragment extends Fragment {
 
                         if (validate()) {
                             userHelper.open();
-                            userHelper.updateUser(String.valueOf(user.getId()),accUsernameEdt.getText().toString(),accEmailEdt.getText().toString(),accPasswordEdt.getText().toString());
+                            userHelper.updateUser(user.getId(),accUsernameEdt.getText().toString(),accEmailEdt.getText().toString(),accPasswordEdt.getText().toString());
                             userHelper.close();
                             dialog.dismiss();
-//                            accUsername.setText(accUsernameEdt.getText().toString());
-//                            accEmail.setText(accEmailEdt.getText().toString());
-//                            accPassword.setText(accPasswordEdt.getText().toString());
                         }
-
-//                        notifyDataSetChanged();
+                        notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -115,7 +135,7 @@ public class AccountFragment extends Fragment {
         userHelper.open();
         Boolean checkUsername = userHelper.validateUsername(accUsernameEdt.getText().toString());
         userHelper.close();
-        if (checkUsername == true){
+        if (checkUsername){
             accUsernameEdt.setError("Username already exists!");
             return false;
         }

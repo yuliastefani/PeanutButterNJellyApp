@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="56dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.ReviewFragment">
+    tools:context=".UI.BottomNav.ReviewFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewRV"

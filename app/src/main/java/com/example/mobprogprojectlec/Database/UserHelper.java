@@ -125,7 +125,7 @@ public class UserHelper {
         return u;
     }
 
-    public void updateUser(String id,String username, String email, String password){
+    public void updateUser(int id,String username, String email, String password){
         String update = "Update User set username = '"+username+"',email = '"+email+"', password = '"+password+"' where id = '"+id+"'";
         db.execSQL(update);
     }

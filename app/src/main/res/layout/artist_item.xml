@@ -5,8 +5,6 @@
     android:id="@+id/artistCV"
     android:layout_width="wrap_content"
     android:layout_height="225dp"
-    app:cardElevation="20dp"
-    app:cardCornerRadius="10dp"
     android:layout_margin="10dp">
 
     <LinearLayout
@@ -22,7 +20,7 @@
                 android:id="@+id/artistImage"
                 android:layout_width="175dp"
                 android:layout_height="175dp"
-                app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                app:shapeAppearanceOverlay="@style/CircleImageView" />
 
             <TextView
                 android:id="@+id/artistName"

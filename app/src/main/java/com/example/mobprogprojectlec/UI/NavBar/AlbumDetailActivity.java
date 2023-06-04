@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,21 +27,25 @@ public class AlbumDetailActivity extends AppCompatActivity {
     public static final String detAlbum = "detAlbum";
     RecyclerView songRecycleView;
     SongAdapter SongAdapter;
-    ImageView albumImage;
+    ImageView albumImage, albumImageBack;
     TextView albumName, albumYear, albumDescription;
+    ImageButton backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_detail);
 
+        albumImageBack = findViewById(R.id.albumImageBack);
         albumImage= findViewById(R.id.albumImage);
         albumName = findViewById(R.id.albumName);
         albumYear = findViewById(R.id.albumYear);
         albumDescription = findViewById(R.id.albumDescription);
+        backBtn = findViewById(R.id.backBtn);
 
         if (getIntent().getExtras() != null) {
             Album album = getIntent().getParcelableExtra(detAlbum, Album.class);
+            Glide.with(this).load(album.getImage()).into(albumImageBack);
             Glide.with(this).load(album.getImage()).into(albumImage);
             albumName.setText(album.getName());
             albumYear.setText(String.valueOf(album.getYear()));
@@ -60,12 +66,16 @@ public class AlbumDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         }
 
+        backBtn.setOnClickListener(v -> finish());
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Album Detail");
         }
         else {
             setTitle("Album Detail");
         }
+
+
 
     }
 }

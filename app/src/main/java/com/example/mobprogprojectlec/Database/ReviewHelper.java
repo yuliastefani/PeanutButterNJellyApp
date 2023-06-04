@@ -42,6 +42,7 @@ public class ReviewHelper {
         Review r;
         String tempComment, songName, albumName;
         Integer tempID, tempUser, tempSong, tempRating;
+        long tempDate;
 
         if (cursor.getCount() > 0) {
             do {
@@ -50,9 +51,70 @@ public class ReviewHelper {
                 tempUser = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
                 tempSong = cursor.getInt(cursor.getColumnIndexOrThrow("song_id"));
                 tempRating = cursor.getInt(cursor.getColumnIndexOrThrow("rating"));
+                tempDate = cursor.getLong(cursor.getColumnIndexOrThrow("date"));
 
-                r = new Review(tempID, tempComment, tempUser, tempSong, tempRating);
+                r = new Review(tempID, tempComment, tempUser, tempSong, tempRating, tempDate);
 
+                reviewVector.add(r);
+                cursor.moveToNext();
+            } while (!cursor.isAfterLast());
+        }
+        cursor.close();
+        return reviewVector;
+    }
+
+    public Review fetchReview(int reviewId) {
+        String view = "Select * from " + TABLE_NAME + " where id= ?";
+
+        Cursor cursor = db.rawQuery(view, new String[]{String.valueOf(reviewId)});
+
+        cursor.moveToFirst();
+
+        Review r;
+        String tempComment;
+        Integer tempID, tempUser, tempSong;
+        Float tempRating;
+        long tempDate;
+
+        if (cursor.getCount() > 0) {
+            tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            tempComment = cursor.getString(cursor.getColumnIndexOrThrow("comment"));
+            tempUser = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
+            tempSong = cursor.getInt(cursor.getColumnIndexOrThrow("song_id"));
+            tempRating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
+            tempDate = cursor.getLong(cursor.getColumnIndexOrThrow("timestamp"));
+
+            r = new Review(tempID, tempComment, tempUser, tempSong, tempRating, tempDate);
+        } else {
+            r = null;
+        }
+        cursor.close();
+        return r;
+    }
+
+    public Vector<Review> viewReviewbyUserID(int userID) {
+        Vector<Review> reviewVector = new Vector<>();
+        String view = "Select * from " + TABLE_NAME + " where user_id = ?";
+        Cursor cursor = db.rawQuery(view, new String[]{String.valueOf(userID)});
+
+        cursor.moveToFirst();
+
+        Review r;
+        String tempComment;
+        Integer tempID, tempUser, tempSong;
+        Float tempRating;
+        Long tempDate;
+
+        if (cursor.getCount() > 0) {
+            do {
+                tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                tempComment = cursor.getString(cursor.getColumnIndexOrThrow("comment"));
+                tempUser = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
+                tempSong = cursor.getInt(cursor.getColumnIndexOrThrow("song_id"));
+                tempRating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
+                tempDate = cursor.getLong(cursor.getColumnIndexOrThrow("timestamp"));
+
+                r = new Review(tempID, tempComment, tempUser, tempSong, tempRating, tempDate);
                 reviewVector.add(r);
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
@@ -68,9 +130,10 @@ public class ReviewHelper {
         cursor.moveToFirst();
 
         Review r;
-        String tempComment, songName, albumName;
+        String tempComment;
         Integer tempID, tempUser, tempSong;
         Float tempRating;
+        Long tempDate;
 
         if (cursor.getCount() > 0) {
             do {
@@ -79,8 +142,9 @@ public class ReviewHelper {
                 tempUser = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
                 tempSong = cursor.getInt(cursor.getColumnIndexOrThrow("song_id"));
                 tempRating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
+                tempDate = cursor.getLong(cursor.getColumnIndexOrThrow("timestamp"));
 
-                r = new Review(tempID, tempComment, tempUser, tempSong, tempRating);
+                r = new Review(tempID, tempComment, tempUser, tempSong, tempRating, tempDate);
                 reviewVector.add(r);
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
@@ -89,7 +153,7 @@ public class ReviewHelper {
         return reviewVector;
     }
 
-    public void insertReview(String comment, int userId, int songId, float rating) {
+    public void insertReview(String comment, int userId, int songId, float rating, long date) {
         String insert = "Select id from Review";
 
         Cursor cursor = db.rawQuery(insert, null);
@@ -97,17 +161,17 @@ public class ReviewHelper {
         if (cursor != null && cursor.moveToLast()) {
             int tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             tempID++;
-            insert = "Insert into Review values (" + tempID + ", '" + comment + "', " + userId + ", " + songId + ", " + rating + ")";
+            insert = "Insert into Review values (" + tempID + ", '" + comment + "', " + userId + ", " + songId + ", " + rating + ", " + date + ")";
             db.execSQL(insert);
         } else {
-            insert = "Insert into Review values (1, '" + comment + "', " + userId + ", " + songId + ", " + rating + ")";
+            insert = "Insert into Review values (1, '" + comment + "', " + userId + ", " + songId + ", " + rating + ", " + date + ")";
             db.execSQL(insert);
         }
         cursor.close();
     }
 
-    public void updateReview(int id, String comment, int userId, int songId, float rating) {
-        String update = "Update Review set comment = '" + comment + "', user_id = " + userId + ", song_id = " + songId + ", rating = " + rating + " where id = " + id;
+    public void updateReview(int id, String comment, float rating, long date) {
+        String update = "Update Review set comment = '" + comment + "', rating = " + rating + ", timestamp = " + date + " where id = " + id;
         db.execSQL(update);
     }
 

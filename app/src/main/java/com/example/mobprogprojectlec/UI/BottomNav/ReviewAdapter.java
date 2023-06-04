@@ -1,11 +1,16 @@
-package com.example.mobprogprojectlec.UI;
+package com.example.mobprogprojectlec.UI.BottomNav;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +38,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     private ReviewHelper reviewHelper;
     private SongHelper songHelper;
     private UserHelper userHelper;
+    Dialog updateReviewDialog;
 
     User user;
     Song song;
@@ -88,10 +94,54 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         holder.albumYear.setText(String.valueOf(albumYear));
         holder.songRating.setText(String.valueOf(r.getRating()));
         Glide.with(ctx).load(albumImage).into(holder.albumImage);
-        holder.reviewCV.setOnClickListener(v->{
-            Toast.makeText(ctx, "Review by " + user.getUsername(), Toast.LENGTH_SHORT).show();
+
+        holder.editReview.setOnClickListener(v->{
+            updateReviewDialog = new Dialog(ctx);
+            updateReviewDialog.setContentView(R.layout.edit_review);
+
+            RatingBar edtSongRating = updateReviewDialog.findViewById(R.id.edtSongRating);
+            EditText edtSongReview = updateReviewDialog.findViewById(R.id.edtSongReview);
+            Button btnUpdateReview = updateReviewDialog.findViewById(R.id.btnUpdateReview);
+            ImageView closeDialog = updateReviewDialog.findViewById(R.id.closeDialog);
+
+            reviewHelper = new ReviewHelper(ctx);
+            reviewHelper.open();
+            String songReviewText = reviewHelper.fetchReview(r.getId()).getComment();
+            Float songRatingFloat = reviewHelper.fetchReview(r.getId()).getRating();
+            reviewHelper.close();
+
+            edtSongRating.setRating(songRatingFloat);
+            edtSongReview.setText(songReviewText);
+
+            long time = System.currentTimeMillis();
+            AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+
+            btnUpdateReview.setOnClickListener(v1->{
+                if(edtSongReview.getText().toString().isEmpty()){
+                    builder.setMessage("Please fill in all fields");
+                    builder.show();
+                }else{
+                    reviewHelper = new ReviewHelper(ctx);
+                    reviewHelper.open();
+                    reviewHelper.updateReview(r.getId(), edtSongReview.getText().toString(), edtSongRating.getRating(), time);
+                    reviewHelper.close();
+
+                    Toast.makeText(ctx, "Review updated!", Toast.LENGTH_SHORT).show();
+                    updateReviewDialog.dismiss();
+                }
+            });
+
+            closeDialog.setOnClickListener(v1->{
+                updateReviewDialog.dismiss();
+            });
+
+            updateReviewDialog.show();
+
         });
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -100,7 +150,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     public class ReviewViewHolder extends RecyclerView.ViewHolder {
         TextView songTitle, artistName, albumName, albumYear, songRating;
-        ImageView albumImage;
+        ImageView albumImage, editReview, closeDialog;
+        EditText edtSongReview;
+        RatingBar edtSongRating;
+        Button btnUpdateReview, btnDeleteReview;
         CardView reviewCV;
 
         public ReviewViewHolder(@NonNull View itemView) {
@@ -111,6 +164,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
             albumYear = itemView.findViewById(R.id.albumYear);
             albumImage = itemView.findViewById(R.id.albumImage);
             songRating = itemView.findViewById(R.id.songRating);
+            editReview = itemView.findViewById(R.id.editReview);
+            edtSongRating = itemView.findViewById(R.id.edtSongRating);
+            edtSongReview = itemView.findViewById(R.id.edtSongReview);
+            btnUpdateReview = itemView.findViewById(R.id.btnUpdateReview);
+            closeDialog = itemView.findViewById(R.id.closeDialog);
+
             reviewCV = itemView.findViewById(R.id.reviewCV);
         }
     }

@@ -13,6 +13,11 @@
         android:icon="@drawable/nav_review"/>
 
     <item
+        android:id="@+id/bottom_feed"
+        android:title="Feed"
+        android:icon="@drawable/nav_feed"/>
+
+    <item
         android:id="@+id/bottom_profile"
         android:title="Profile"
         android:icon="@drawable/nav_acc"/>

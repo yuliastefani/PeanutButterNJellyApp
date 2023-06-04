@@ -1,4 +1,4 @@
-package com.example.mobprogprojectlec.UI;
+package com.example.mobprogprojectlec.UI.BottomNav;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -73,6 +73,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ArtistFragment()).commit();
+                getActivity().setTitle("Artist");
+
             }
         });
 
@@ -80,6 +82,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AlbumFragment()).commit();
+                getActivity().setTitle("Album");
             }
         });
 
@@ -87,6 +90,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SongFragment()).commit();
+                getActivity().setTitle("Song");
             }
         });
 

@@ -8,51 +8,21 @@
     tools:context=".UI.NavBar.ArtistDetailActivity"
     android:background="@color/pink_2">
 
-    <include layout="@layout/background_layout" />
-
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/albumImageBack"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="420dp"/>
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="20dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/albumImage"/>
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_back"
+        android:layout_margin="10dp"
+        android:id="@+id/backBtn"
+        android:onClick="backBtn"
+        android:backgroundTint="@color/brown_1"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_toEndOf="@id/albumImage">
-
-            <TextView
-                android:id="@+id/albumName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:textColor="@color/brown_1"
-                android:textStyle="bold"
-                android:textSize="25dp"/>
-
-            <TextView
-                android:id="@+id/albumYear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/albumName"
-                android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="20dp"
-                android:textColor="@color/brown_1"
-                android:textStyle="bold"
-                android:textSize="20dp" />
-
-        </RelativeLayout>
-
-
-
-    </RelativeLayout>
-
+    <include layout="@layout/background_layout" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -63,12 +33,57 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <RelativeLayout
+                android:id="@+id/rlDet"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:id="@+id/albumImage"
+                    app:shapeAppearanceOverlay="@style/RoundedImageView"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_toEndOf="@id/albumImage">
+
+                    <TextView
+                        android:id="@+id/albumName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:textColor="@color/brown_1"
+                        android:textStyle="bold"
+                        android:textSize="25dp"/>
+
+                    <TextView
+                        android:id="@+id/albumYear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/albumName"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:textColor="@color/brown_1"
+                        android:textStyle="bold"
+                        android:textSize="20dp" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/albumDescriptionTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
+                android:layout_below="@id/rlDet"
                 android:text="Description"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -80,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/albumDescriptionTitle"
                 android:textAlignment="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:textSize="15dp"
                 android:layout_marginHorizontal="20dp"
                 android:textColor="@color/brown_3"/>

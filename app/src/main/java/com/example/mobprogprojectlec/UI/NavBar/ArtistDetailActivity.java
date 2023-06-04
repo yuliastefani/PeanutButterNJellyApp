@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,20 +38,24 @@ public class ArtistDetailActivity extends AppCompatActivity {
     public static final String detArtist = "detArtist";
     RecyclerView albumRecycleView;
     AlbumAdapter AlbumAdapter;
-    ImageView artistImage;
+    ImageView artistImage, artistImageBack;
     TextView artistName, artistDescription;
+    ImageButton backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_detail);
 
-         artistImage= findViewById(R.id.artistImage);
-         artistName = findViewById(R.id.artistName);
-         artistDescription = findViewById(R.id.artistDescription);
+        artistImageBack = findViewById(R.id.artistImageBack);
+        artistImage= findViewById(R.id.artistImage);
+        artistName = findViewById(R.id.artistName);
+        artistDescription = findViewById(R.id.artistDescription);
+        backBtn = findViewById(R.id.backBtn);
 
         if(getIntent().getExtras() != null){
             Artist artist = getIntent().getParcelableExtra(detArtist, Artist.class);
+            Glide.with(this).load(artist.getImage()).into(artistImageBack);
             Glide.with(this).load(artist.getImage()).into(artistImage);
             artistName.setText(artist.getName());
             artistDescription.setText(artist.getDescription());
@@ -75,6 +80,10 @@ public class ArtistDetailActivity extends AppCompatActivity {
         else {
             setTitle("Artist Detail");
         }
+
+        backBtn.setOnClickListener(v -> {
+            finish();
+        });
 
     }
 

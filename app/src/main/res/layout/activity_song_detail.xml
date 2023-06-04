@@ -5,14 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.ReviewFragment"
+    tools:context=".UI.BottomNav.ReviewFragment"
     android:orientation="vertical"
     android:background="@color/pink_2">
 
     <ImageView
         android:id="@+id/albumImageBack"
         android:layout_width="match_parent"
-        android:layout_height="420dp" />
+        android:layout_height="420dp"/>
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_back"
+        android:layout_margin="10dp"
+        android:id="@+id/backBtn"
+        android:onClick="backBtn"
+        android:backgroundTint="@color/brown_1"/>
 
     <include layout="@layout/background_layout" />
 
@@ -21,14 +30,17 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/rlDet"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:layout_marginTop="200dp">
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="20dp"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:id="@+id/albumImage"
+                android:layout_marginStart="20dp"
+                app:shapeAppearanceOverlay="@style/RoundedImageView"
                 android:layout_centerVertical="true"/>
 
             <RelativeLayout
@@ -51,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/songTitle"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="20dp"
                     android:textColor="@color/brown_1"
                     android:textStyle="bold"
@@ -62,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/songArtist"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="20dp"
                     android:textColor="@color/brown_1"
                     android:textStyle="bold"
@@ -73,32 +85,44 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/songPreview"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/rlPreview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="225dp"
-            android:text="Track Preview"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/brown_2"/>
+            android:layout_below="@id/rlDet"
+            android:gravity="center_horizontal">
 
-        <ToggleButton
-            android:id="@+id/playPauseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:layout_below="@id/songPreview"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:button="@drawable/selector_play_pause_button" />
+            <TextView
+                android:id="@+id/songPreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Track Preview"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_2"
+                android:layout_centerVertical="true"/>
+
+            <ToggleButton
+                android:id="@+id/playPauseButton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="7dp"
+                android:background="@null"
+                android:textOn="@null"
+                android:textOff="@null"
+                android:text="@null"
+                android:layout_toEndOf="@id/songPreview"
+                android:button="@drawable/selector_play_pause_button" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/playPauseButton"
+            android:layout_below="@id/rlPreview"
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="20dp"
             android:textColor="@color/brown_2"
@@ -112,7 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/rating"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:stepSize="0.5"/>
 
@@ -122,7 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/songRating"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp"
             android:textColor="@color/brown_2"
             android:textStyle="bold"
@@ -133,12 +157,12 @@
         <EditText
             android:id="@+id/songComment"
             android:layout_width="match_parent"
-            android:layout_height="125dp"
+            android:layout_height="85dp"
             android:background="@drawable/edittext_comment_box"
             android:padding="8dp"
             android:layout_below="@id/Review"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:hint="Enter your comment"
             android:textColorHint="#999999" />
 
@@ -147,7 +171,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/songComment"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp"
             android:text="Review"/>
 

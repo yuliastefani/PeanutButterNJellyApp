@@ -7,13 +7,15 @@ public class Review {
     private int userId;
     private int songId;
     private float rating;
+    private long date;
 
-    public Review(int id, String comment, int userId, int songId, float rating) {
+    public Review(int id, String comment, int userId, int songId, float rating, long date) {
         this.id = id;
         this.comment = comment;
         this.userId = userId;
         this.songId = songId;
         this.rating = rating;
+        this.date = date;
     }
 
     public int getId() {
@@ -54,5 +56,13 @@ public class Review {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }

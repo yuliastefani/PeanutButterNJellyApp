@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -32,12 +33,13 @@ public class SongDetailActivity extends AppCompatActivity {
     public static final String detSong = "detSong";
     Vector<Song> vSong;
     TextView songTitle, songArtist, songGenre;
-    ImageView albumImage;
+    ImageView albumImage, albumImageBack;
     RatingBar songRating;
     EditText songComment;
     ToggleButton playPauseButton;
     MediaPlayer mediaPlayer;
     Button reviewButton;
+    ImageButton backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class SongDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_song_detail);
 
         albumImage = findViewById(R.id.albumImage);
+        albumImageBack = findViewById(R.id.albumImageBack);
         songTitle = findViewById(R.id.songTitle);
         songArtist = findViewById(R.id.songArtist);
         songGenre = findViewById(R.id.songGenre);
@@ -53,6 +56,7 @@ public class SongDetailActivity extends AppCompatActivity {
         songRating = findViewById(R.id.songRating);
         songComment = findViewById(R.id.songComment);
         reviewButton = findViewById(R.id.reviewButton);
+        backBtn = findViewById(R.id.backBtn);
 
         if (getIntent().getExtras() != null) {
             Song song = getIntent().getParcelableExtra(detSong, Song.class);
@@ -68,6 +72,7 @@ public class SongDetailActivity extends AppCompatActivity {
             artistHelper.close();
 
             Glide.with(this).load(album.getImage()).into(albumImage);
+            Glide.with(this).load(album.getImage()).into(albumImageBack);
             songTitle.setText(song.getTitle());
             songArtist.setText(artist.getName());
             songGenre.setText(song.getGenre());
@@ -91,6 +96,10 @@ public class SongDetailActivity extends AppCompatActivity {
                 }
             });
 
+            mediaPlayer.setOnCompletionListener(mp -> {
+                playPauseButton.setChecked(false);
+            });
+
             reviewButton.setOnClickListener(v -> {
                 if(validate()){
                     SharedPreferences sharedPreferences = getSharedPreferences("username", MODE_PRIVATE);
@@ -103,7 +112,8 @@ public class SongDetailActivity extends AppCompatActivity {
 
                     ReviewHelper reviewHelper = new ReviewHelper(this);
                     reviewHelper.open();
-                    reviewHelper.insertReview(songComment.getText().toString(), user.getId(), song.getId(), songRating.getRating());
+                    long time = System.currentTimeMillis();
+                    reviewHelper.insertReview(songComment.getText().toString(), user.getId(), song.getId(), songRating.getRating(), time);
                     reviewHelper.close();
                     Toast.makeText(this, "Review Submitted", Toast.LENGTH_SHORT).show();
                 }
@@ -113,6 +123,10 @@ public class SongDetailActivity extends AppCompatActivity {
         else {
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         }
+
+        backBtn.setOnClickListener(v -> {
+            finish();
+        });
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Song Detail");

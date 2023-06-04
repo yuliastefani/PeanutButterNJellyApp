@@ -1,5 +1,7 @@
-package com.example.mobprogprojectlec.UI;
+package com.example.mobprogprojectlec.UI.BottomNav;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mobprogprojectlec.Database.ReviewHelper;
-import com.example.mobprogprojectlec.Database.SongHelper;
+import com.example.mobprogprojectlec.Database.UserHelper;
 import com.example.mobprogprojectlec.Model.Review;
+import com.example.mobprogprojectlec.Model.User;
 import com.example.mobprogprojectlec.R;
-import com.example.mobprogprojectlec.UI.NavBar.SongAdapter;
 
 import java.util.Vector;
 
@@ -23,6 +25,8 @@ public class ReviewFragment extends Fragment {
     private ReviewHelper reviewHelper;
     private Vector<Review> vReview;
     private RecyclerView reviewRecyclerView;
+    UserHelper userHelper;
+    User user;
 
 
     @Override
@@ -37,9 +41,17 @@ public class ReviewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initialize();
 
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("username",Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+
+        userHelper = new UserHelper(getContext());
+        userHelper.open();
+        user = userHelper.getUser(username);
+        userHelper.close();
+
         reviewHelper = new ReviewHelper(getContext());
         reviewHelper.open();
-        vReview = reviewHelper.viewReview();
+        vReview = reviewHelper.viewReviewbyUserID(user.getId());
         reviewHelper.close();
 
         reviewRecyclerView = view.findViewById(R.id.reviewRV);
