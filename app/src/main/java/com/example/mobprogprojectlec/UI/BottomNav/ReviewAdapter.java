@@ -95,6 +95,25 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         holder.songRating.setText(String.valueOf(r.getRating()));
         Glide.with(ctx).load(albumImage).into(holder.albumImage);
 
+        holder.deleteReview.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+            builder.setMessage("Are you sure you want to delete this review?");
+            builder.setPositiveButton("Yes", (dialog, which) -> {
+                reviewHelper = new ReviewHelper(ctx);
+                reviewHelper.open();
+                reviewHelper.deleteReview(r.getId());
+                reviewHelper.close();
+
+                Toast.makeText(ctx, "Review deleted!", Toast.LENGTH_SHORT).show();
+            });
+            builder.setNegativeButton("No", (dialog, which) -> {
+                dialog.dismiss();
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        });
+
         holder.editReview.setOnClickListener(v->{
             updateReviewDialog = new Dialog(ctx);
             updateReviewDialog.setContentView(R.layout.edit_review);
@@ -150,10 +169,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     public class ReviewViewHolder extends RecyclerView.ViewHolder {
         TextView songTitle, artistName, albumName, albumYear, songRating;
-        ImageView albumImage, editReview, closeDialog;
+        ImageView albumImage, editReview, deleteReview, closeDialog;
         EditText edtSongReview;
         RatingBar edtSongRating;
-        Button btnUpdateReview, btnDeleteReview;
+        Button btnUpdateReview;
         CardView reviewCV;
 
         public ReviewViewHolder(@NonNull View itemView) {
@@ -165,11 +184,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
             albumImage = itemView.findViewById(R.id.albumImage);
             songRating = itemView.findViewById(R.id.songRating);
             editReview = itemView.findViewById(R.id.editReview);
+            deleteReview = itemView.findViewById(R.id.deleteReview);
             edtSongRating = itemView.findViewById(R.id.edtSongRating);
             edtSongReview = itemView.findViewById(R.id.edtSongReview);
             btnUpdateReview = itemView.findViewById(R.id.btnUpdateReview);
             closeDialog = itemView.findViewById(R.id.closeDialog);
-
             reviewCV = itemView.findViewById(R.id.reviewCV);
         }
     }

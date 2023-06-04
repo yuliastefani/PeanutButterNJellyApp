@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.mobprogprojectlec.UI.BottomNav.AccountFragment;
+import com.example.mobprogprojectlec.UI.BottomNav.FeedFragment;
 import com.example.mobprogprojectlec.UI.BottomNav.HomeFragment;
 import com.example.mobprogprojectlec.UI.BottomNav.ReviewFragment;
 import com.example.mobprogprojectlec.UI.Landing.LoginActivity;
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
 
                     case R.id.bottom_feed:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReviewFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FeedFragment()).commit();
                         getSupportActionBar().setTitle("Feed");
                         break;
 
