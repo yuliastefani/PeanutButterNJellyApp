@@ -141,7 +141,9 @@ public class HomeFragment extends Fragment {
         vSong = songHelper.viewSong();
         songHelper.close();
 
-        vReview.setSize(5);
+        if (vReview.size() > 5){
+            vReview.setSize(5);
+        }
         vArtist.setSize(5);
         vAlbum.setSize(5);
         vSong.setSize(5);

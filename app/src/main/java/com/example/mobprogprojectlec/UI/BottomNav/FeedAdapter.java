@@ -1,6 +1,7 @@
 package com.example.mobprogprojectlec.UI.BottomNav;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,6 @@ import com.example.mobprogprojectlec.Database.SongHelper;
 import com.example.mobprogprojectlec.Database.UserHelper;
 import com.example.mobprogprojectlec.Model.Review;
 import com.example.mobprogprojectlec.Model.Song;
-import com.example.mobprogprojectlec.Model.User;
 import com.example.mobprogprojectlec.R;
 
 import java.util.Vector;
@@ -44,7 +44,18 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull FeedAdapter.ViewHolder holder, int position) {
+
+        if (position < 0 || position >= vReview.size()) {
+            Log.d("FeedAdapter", "Invalid position: " + position);
+            return;
+        }
+
         Review review = vReview.get(position);
+
+        if (review == null) {
+            Log.d("FeedAdapter", "Review object is null at position: " + position);
+            return;
+        }
 
         userHelper = new UserHelper(ctx);
         userHelper.open();
@@ -68,8 +79,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
         String albumImage = albumHelper.fetchAlbum(song.getAlbumId()).getImage();
         albumHelper.close();
 
-        Long systemTime = System.currentTimeMillis();
-        Long timeDiff = systemTime - review.getDate();
+        long systemTime = System.currentTimeMillis();
+        long timeDiff = systemTime - review.getDate();
 
         holder.usernameID.setText(username);
         if (timeDiff < (60 * 1000)) { // Less than a minute
