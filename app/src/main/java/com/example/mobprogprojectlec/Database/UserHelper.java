@@ -57,6 +57,33 @@ public class UserHelper {
         return userVector;
     }
 
+    public User fetchUser(int userID){
+        String search = "Select * from " + table + " where id = ?";
+
+        Cursor cursor = db.rawQuery(search,new String[]{String.valueOf(userID)});
+
+        cursor.moveToFirst();
+
+        User u;
+        String tempUsername,tempEmail,tempPassword;
+        Integer tempID;
+
+        if (cursor.getCount() > 0){
+            tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            tempEmail = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+            tempUsername = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+            tempPassword = cursor.getString(cursor.getColumnIndexOrThrow("password"));
+
+            u = new User(tempID,tempUsername,tempEmail,tempPassword);
+        }else {
+            u = null;
+        }
+
+
+        cursor.close();
+        return u;
+    }
+
     public void insertUser(String username, String email, String password){
         String insert = "Select id from User";
         Cursor cursor = db.rawQuery(insert,null);

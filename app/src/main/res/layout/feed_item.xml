@@ -1,6 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/feedCV"
+    app:cardElevation="20dp"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/usernameID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/brown_1"/>
+
+        <TextView
+            android:id="@+id/timeAdded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textSize="15dp"
+            android:textColor="@color/brown_2"/>
+
+        <TextView
+            android:id="@+id/songReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/usernameID"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textColor="@color/brown_2"/>
+
+        <RelativeLayout
+            android:id="@+id/rlRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/songReview"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/theirRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Their Rating: "
+                android:textSize="15dp"
+                android:textColor="@color/brown_2"/>
+
+            <ImageView
+                android:id="@+id/star"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="15dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/theirRating"
+                android:src="@drawable/ic_star"
+                app:tint="@color/yellow" />
+
+            <TextView
+                android:id="@+id/songRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@id/star"
+                android:textColor="@color/brown_1"
+                android:textSize="25dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlDet"
+            android:layout_width="match_parent"
+            android:layout_below="@id/rlRate"
+            android:layout_height="65dp"
+            android:layout_marginTop="15dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/albumImage"
+                android:layout_marginStart="0dp"
+                app:shapeAppearanceOverlay="@style/RoundedImageView"
+                android:layout_centerVertical="true"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/albumImage"
+                android:gravity="center_vertical"
+                android:layout_marginHorizontal="20dp">
+
+                <TextView
+                    android:id="@+id/songTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/brown_1"
+                    android:textStyle="bold"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:id="@+id/songArtist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/songTitle"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/brown_1"
+                    android:textStyle="bold"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/albumName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/songArtist"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/brown_1"
+                    android:textStyle="bold"
+                    android:textSize="10dp" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
 
 </androidx.cardview.widget.CardView>

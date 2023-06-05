@@ -16,6 +16,27 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/allReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="All Review →"
+                android:textColor="@color/brown_1"
+                android:textSize="30dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/feedRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/allReview"
+                android:padding="10dp"
+                android:scrollbars="horizontal"
+                tools:listitem="@layout/feed_item" />
+
+            <TextView
                 android:id="@+id/allArtist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -25,6 +46,7 @@
                 android:layout_marginBottom="20dp"
                 android:text="All Artist →"
                 android:textColor="@color/brown_1"
+                android:layout_below="@+id/feedRV"
                 android:textSize="30dp" />
 
             <androidx.recyclerview.widget.RecyclerView

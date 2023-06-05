@@ -123,10 +123,11 @@ public class ReviewHelper {
         return reviewVector;
     }
 
-    public Vector<Review> viewReview() {
+    public Vector<Review> viewReview(int loggedInUserId) {
         Vector<Review> reviewVector = new Vector<>();
-        String view = "Select * from " + TABLE_NAME;
-        Cursor cursor = db.rawQuery(view, null);
+        String view = "SELECT * FROM " + TABLE_NAME + " WHERE user_id != ?";
+        String[] selectionArgs = {String.valueOf(loggedInUserId)};
+        Cursor cursor = db.rawQuery(view, selectionArgs);
         cursor.moveToFirst();
 
         Review r;
