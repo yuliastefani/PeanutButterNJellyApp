@@ -9,13 +9,17 @@
     android:orientation="vertical"
     android:background="@color/pink_2">
 
-    <include layout="@layout/background_layout"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/includedLayout"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/rounded_background"/>
 
     <TextView
-        android:id="@+id/tvAccountDetail"
+        android:id="@+id/tvAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Account Detail"
         android:textSize="30dp"
         android:gravity="center"
         android:layout_marginTop="100dp"
@@ -23,11 +27,11 @@
         android:textColor="@color/white"/>
 
     <TextView
+        android:id="@+id/tvAccountDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:layout_centerHorizontal="true"
-        android:text="Everything about your account"
         android:textSize="15dp"
         android:textStyle="italic"
         android:textColor="@color/white"/>

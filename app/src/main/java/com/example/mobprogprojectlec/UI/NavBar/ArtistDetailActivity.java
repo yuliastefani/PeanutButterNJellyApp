@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,7 +39,7 @@ public class ArtistDetailActivity extends AppCompatActivity {
     public static final String detArtist = "detArtist";
     RecyclerView albumRecycleView;
     AlbumAdapter AlbumAdapter;
-    ImageView artistImage, artistImageBack;
+    ImageView artistImage, artistImageBack, includedLayout;
     TextView artistName, artistDescription;
     ImageButton backBtn;
 
@@ -74,12 +75,21 @@ public class ArtistDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         }
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Artist Detail");
+        includedLayout = findViewById(R.id.includedLayout);
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            includedLayout.setImageResource(R.drawable.rounded_background_dark);
+        } else {
+            includedLayout.setImageResource(R.drawable.rounded_background);
         }
-        else {
-            setTitle("Artist Detail");
-        }
+
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setTitle("Artist Detail");
+//        }
+//        else {
+//            setTitle("Artist Detail");
+//        }
 
         backBtn.setOnClickListener(v -> {
             finish();

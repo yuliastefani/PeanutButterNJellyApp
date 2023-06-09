@@ -22,7 +22,12 @@
       android:onClick="backBtn"
       android:backgroundTint="@color/brown_1"/>
 
-  <include layout="@layout/background_layout" />
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/includedLayout"
+      android:layout_marginTop="200dp"
+      android:src="@drawable/rounded_background"/>
 
   <ScrollView
       android:layout_width="match_parent"

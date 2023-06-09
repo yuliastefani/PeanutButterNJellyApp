@@ -1,6 +1,7 @@
 package com.example.mobprogprojectlec.UI.BottomNav;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,6 +111,26 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
         holder.songArtist.setText(songArtist);
         holder.albumName.setText(albumName);
         Glide.with(ctx).load(albumImage).into(holder.albumImage);
+
+        int nightMode = ctx.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            holder.usernameID.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.timeAdded.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.songReview.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.songRating.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.songTitle.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.songArtist.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.albumName.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+        } else {
+            holder.usernameID.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.timeAdded.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.songReview.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.songRating.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.songTitle.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.songArtist.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.albumName.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+        }
 
     }
 

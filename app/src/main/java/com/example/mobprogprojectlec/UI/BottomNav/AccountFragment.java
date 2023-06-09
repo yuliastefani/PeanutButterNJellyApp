@@ -2,8 +2,14 @@ package com.example.mobprogprojectlec.UI.BottomNav;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,19 +29,25 @@ import com.example.mobprogprojectlec.R;
 public class AccountFragment extends Fragment {
 
     Button editAccBtn;
-    TextView accUsername, accEmail, accPassword;
+    TextView accUsername, accEmail, accPassword, tvAccount, tvAccountDetail;
     EditText accUsernameEdt, accEmailEdt, accPasswordEdt;
     ImageView closeDialog;
     User user;
     UserHelper userHelper;
     Dialog dialog;
     ToggleButton viewPasswordBtn;
+    ImageView includedLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View accountFragment = inflater.inflate(R.layout.fragment_account, container, false);
+
+        tvAccount = accountFragment.findViewById(R.id.tvAccount);
+        tvAccount.setText("Account Detail");
+        tvAccountDetail = accountFragment.findViewById(R.id.tvAccountDetail);
+        tvAccountDetail.setText("Everything about your account");
 
         editAccBtn = accountFragment.findViewById(R.id.editAccBtn);
         accUsername = accountFragment.findViewById(R.id.accUsername);
@@ -64,6 +76,20 @@ public class AccountFragment extends Fragment {
                 }
             }
         });
+
+        includedLayout = accountFragment.findViewById(R.id.includedLayout);
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            includedLayout.setImageResource(R.drawable.rounded_background_dark);
+            tvAccount.setTextColor(Color.BLACK);
+            tvAccountDetail.setTextColor(Color.BLACK);
+            accUsername.setTextColor(getResources().getColor(R.color.brown_3));
+            accEmail.setTextColor(getResources().getColor(R.color.brown_3));
+            accPassword.setTextColor(getResources().getColor(R.color.brown_3));
+        } else {
+            includedLayout.setImageResource(R.drawable.rounded_background);
+        }
 
         editAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,5 +178,7 @@ public class AccountFragment extends Fragment {
             return true;
         }
     }
+
+
 
 }

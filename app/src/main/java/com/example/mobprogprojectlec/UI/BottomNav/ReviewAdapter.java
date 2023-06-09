@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReviewAdapter.ReviewViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         Review r = vReview.get(position);
 
         SharedPreferences sharedPreferences = ctx.getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -95,6 +96,23 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         holder.songRating.setText(String.valueOf(r.getRating()));
         Glide.with(ctx).load(albumImage).into(holder.albumImage);
 
+        int nightMode = ctx.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            holder.songTitle.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.artistName.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.albumName.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.albumYear.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.songRating.setTextColor(ctx.getResources().getColor(R.color.brown_3));
+            holder.editReview.setColorFilter(ctx.getResources().getColor(R.color.brown_3));
+        } else {
+            holder.songTitle.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.artistName.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.albumName.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.albumYear.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+            holder.songRating.setTextColor(ctx.getResources().getColor(R.color.brown_1));
+        }
+
         holder.deleteReview.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
             builder.setMessage("Are you sure you want to delete this review?");
@@ -103,7 +121,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
                 reviewHelper.open();
                 reviewHelper.deleteReview(r.getId());
                 reviewHelper.close();
-
+                vReview.remove(position);
                 Toast.makeText(ctx, "Review deleted!", Toast.LENGTH_SHORT).show();
             });
             builder.setNegativeButton("No", (dialog, which) -> {

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -27,7 +28,7 @@ public class AlbumDetailActivity extends AppCompatActivity {
     public static final String detAlbum = "detAlbum";
     RecyclerView songRecycleView;
     SongAdapter SongAdapter;
-    ImageView albumImage, albumImageBack;
+    ImageView albumImage, albumImageBack, includedLayout;
     TextView albumName, albumYear, albumDescription;
     ImageButton backBtn;
 
@@ -68,12 +69,21 @@ public class AlbumDetailActivity extends AppCompatActivity {
 
         backBtn.setOnClickListener(v -> finish());
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Album Detail");
+        includedLayout = findViewById(R.id.includedLayout);
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            includedLayout.setImageResource(R.drawable.rounded_background_dark);
+        } else {
+            includedLayout.setImageResource(R.drawable.rounded_background);
         }
-        else {
-            setTitle("Album Detail");
-        }
+
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setTitle("Album Detail");
+//        }
+//        else {
+//            setTitle("Album Detail");
+//        }
 
 
 

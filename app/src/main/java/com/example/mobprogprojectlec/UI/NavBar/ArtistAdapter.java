@@ -2,6 +2,7 @@ package com.example.mobprogprojectlec.UI.NavBar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,15 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         Artist a = vArtist.get(position);
         holder.artistName.setText(a.getName());
         Glide.with(artistContent).load(a.getImage()).into(holder.artistImage);
+
+        int nightMode = artistContent.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            holder.artistName.setTextColor(artistContent.getResources().getColor(R.color.brown_3));
+        } else {
+            holder.artistName.setTextColor(artistContent.getResources().getColor(R.color.brown_2));
+        }
+
         holder.artistCV.setOnClickListener(v -> {
             Intent detailArtistIntent = new Intent(artistContent, ArtistDetailActivity.class);
             detailArtistIntent.putExtra(ArtistDetailActivity.detArtist, vArtist.get(position));

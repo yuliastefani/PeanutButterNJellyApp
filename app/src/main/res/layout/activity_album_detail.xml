@@ -22,7 +22,12 @@
         android:onClick="backBtn"
         android:backgroundTint="@color/brown_1"/>
 
-    <include layout="@layout/background_layout" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/includedLayout"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/rounded_background"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,7 +41,7 @@
             <RelativeLayout
                 android:id="@+id/rlDet"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="150dp"
@@ -49,7 +54,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/albumImage">
 
                     <TextView

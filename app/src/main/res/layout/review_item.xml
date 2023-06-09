@@ -4,14 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/reviewCV"
     android:layout_width="match_parent"
-    android:layout_height="225dp"
+    android:layout_height="wrap_content"
     app:cardElevation="20dp"
     app:cardCornerRadius="10dp"
     android:layout_margin="10dp">
 
     <RelativeLayout
         android:layout_width="375dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:orientation="horizontal">
 
@@ -20,13 +20,15 @@
             android:layout_width="125dp"
             android:layout_height="175dp"
             android:layout_centerVertical="true"
+            android:layout_marginVertical="20dp"
             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
         <RelativeLayout
+            android:id="@+id/songInfo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_toEndOf="@id/albumImage"
-            android:gravity="center_vertical">
+            android:layout_centerVertical="true">
 
             <TextView
                 android:id="@+id/songTitle"
@@ -92,10 +94,10 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/songInfo">
 
             <ImageView
                 android:id="@+id/editReview"

@@ -2,6 +2,7 @@ package com.example.mobprogprojectlec.UI.NavBar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,17 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         holder.songName.setText(s.getTitle());
         holder.artistName.setText(artist.getName());
         Glide.with(songContent).load(album.getImage()).into(holder.albumImage);
+
+        int nightMode = songContent.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            holder.songName.setTextColor(songContent.getResources().getColor(R.color.brown_3));
+            holder.artistName.setTextColor(songContent.getResources().getColor(R.color.brown_2));
+        } else {
+            holder.songName.setTextColor(songContent.getResources().getColor(R.color.brown_1));
+            holder.artistName.setTextColor(songContent.getResources().getColor(R.color.brown_2));
+        }
+
         holder.songCV.setOnClickListener(v -> {
             Intent songIntent = new Intent(songContent, SongDetailActivity.class);
             songIntent.putExtra(SongDetailActivity.detSong, vSong.get(position));

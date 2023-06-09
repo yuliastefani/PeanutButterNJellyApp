@@ -51,7 +51,7 @@ public class BoardingActivity extends AppCompatActivity {
             }
         });
 
-        String songUrl = "https://mocki.io/v1/062670a2-449a-4cd6-acaf-989478112085";
+        String songUrl = "https://mocki.io/v1/f5140d70-7614-45d6-83ee-694240fa12f0";
 
         songHelper = new SongHelper(this);
         artistHelper = new ArtistHelper(this);

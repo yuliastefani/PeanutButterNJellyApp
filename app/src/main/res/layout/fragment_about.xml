@@ -7,7 +7,12 @@
     tools:context=".UI.NavBar.AboutFragment"
     android:background="@color/pink_2">
 
-    <include layout="@layout/background_layout"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/includedLayout"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/rounded_background"/>
 
     <ImageView
         android:layout_width="75dp"
@@ -28,6 +33,7 @@
         android:textColor="@color/white"/>
 
     <TextView
+        android:id="@+id/tvAboutUsDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -50,7 +56,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Peanut Butter n Jelly is a mobile application that allows users to their review about their favourite song. The application also allows users to save their favorite songs and support the Artists as well."
+        android:text="Peanut Butter n Jelly is a mobile application that allows users to their review about their favourite song. The application also allows users to see others people thouth about their favourite song and support the Artists as well."
         android:textSize="20dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="300dp"
@@ -127,6 +133,7 @@
             android:layout_marginHorizontal="15dp">
 
             <ImageView
+                android:id="@+id/iv_twitter"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_twitter"/>

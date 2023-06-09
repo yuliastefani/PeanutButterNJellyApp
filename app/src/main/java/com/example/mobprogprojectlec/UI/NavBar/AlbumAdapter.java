@@ -2,6 +2,7 @@ package com.example.mobprogprojectlec.UI.NavBar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         this.vAlbum = vAlbum;
     }
 
-    public void setvAlbum(Vector<Album> vAlbum) {
-        this.vAlbum = vAlbum;
-    }
-
     @NonNull
     @Override
     public AlbumAdapter.AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,6 +41,15 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         Album a = vAlbum.get(position);
         holder.albumName.setText(a.getName());
         Glide.with(albumContent).load(a.getImage()).into(holder.albumImage);
+
+        int nightMode = albumContent.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            holder.albumName.setTextColor(albumContent.getResources().getColor(R.color.brown_3));
+        } else {
+            holder.albumName.setTextColor(albumContent.getResources().getColor(R.color.brown_2));
+        }
+
         holder.albumCV.setOnClickListener(v -> {
             Intent detailAlbumIntent = new Intent(albumContent, AlbumDetailActivity.class);
             detailAlbumIntent.putExtra(AlbumDetailActivity.detAlbum, vAlbum.get(position));

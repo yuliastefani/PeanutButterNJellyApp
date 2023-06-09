@@ -23,7 +23,6 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="All Review →"
                 android:textColor="@color/brown_1"
                 android:textSize="30dp" />
 
@@ -44,7 +43,6 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="All Artist →"
                 android:textColor="@color/brown_1"
                 android:layout_below="@+id/feedRV"
                 android:textSize="30dp" />
@@ -62,7 +60,6 @@
                 android:id="@+id/allAlbum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="All Album →"
                 android:textSize="30dp"
                 android:layout_below="@+id/artistRV"
                 android:layout_margin="20dp"
@@ -81,7 +78,6 @@
                 android:id="@+id/allSong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="All Song →"
                 android:textSize="30dp"
                 android:layout_below="@+id/albumRV"
                 android:layout_margin="20dp"

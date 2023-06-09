@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/artistCV"
     android:layout_width="wrap_content"
-    android:layout_height="225dp"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp">
 
     <LinearLayout
@@ -26,8 +26,10 @@
                 android:id="@+id/artistName"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
                 android:layout_below="@id/artistImage"
+                android:layout_centerVertical="true"
                 android:textColor="@color/brown_2"
                 android:gravity="center"
                 android:textSize="20dp" />

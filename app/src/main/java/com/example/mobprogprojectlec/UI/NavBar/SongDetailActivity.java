@@ -3,6 +3,7 @@ package com.example.mobprogprojectlec.UI.NavBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
@@ -33,7 +34,7 @@ public class SongDetailActivity extends AppCompatActivity {
     public static final String detSong = "detSong";
     Vector<Song> vSong;
     TextView songTitle, songArtist, songGenre;
-    ImageView albumImage, albumImageBack;
+    ImageView albumImage, albumImageBack, includedLayout;
     RatingBar songRating;
     EditText songComment;
     ToggleButton playPauseButton;
@@ -128,12 +129,45 @@ public class SongDetailActivity extends AppCompatActivity {
             finish();
         });
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Song Detail");
+        includedLayout = findViewById(R.id.includedLayout);
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        TextView songPreview = findViewById(R.id.songPreview);
+        TextView rating = findViewById(R.id.rating);
+        TextView Review = findViewById(R.id.Review);
+
+        songPreview.setText("Track Preview");
+        rating.setText("Rate this song");
+        Review.setText("Write a Review for this Song");
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            includedLayout.setImageResource(R.drawable.rounded_background_dark);
+            songTitle.setTextColor(getResources().getColor(R.color.brown_3));
+            songArtist.setTextColor(getResources().getColor(R.color.brown_3));
+            songGenre.setTextColor(getResources().getColor(R.color.brown_3));
+            songComment.setTextColor(getResources().getColor(R.color.brown_3));
+            songComment.setBackgroundColor(getResources().getColor(R.color.black));
+            songPreview.setTextColor(getResources().getColor(R.color.brown_3));
+            rating.setTextColor(getResources().getColor(R.color.brown_3));
+            Review.setTextColor(getResources().getColor(R.color.brown_3));
+
+        } else {
+            includedLayout.setImageResource(R.drawable.rounded_background);
+            songTitle.setTextColor(getResources().getColor(R.color.brown_1));
+            songArtist.setTextColor(getResources().getColor(R.color.brown_1));
+            songGenre.setTextColor(getResources().getColor(R.color.brown_1));
+            songComment.setTextColor(getResources().getColor(R.color.brown_1));
+            songComment.setBackgroundColor(getResources().getColor(R.color.white));
+            songPreview.setTextColor(getResources().getColor(R.color.brown_1));
+            rating.setTextColor(getResources().getColor(R.color.brown_1));
+            Review.setTextColor(getResources().getColor(R.color.brown_1));
         }
-        else {
-            setTitle("Song Detail");
-        }
+
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setTitle("Song Detail");
+//        }
+//        else {
+//            setTitle("Song Detail");
+//        }
 
     }
 

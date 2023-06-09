@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -34,9 +36,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottom_nav;
-//    View switchLayout = getLayoutInflater().inflate(R.layout.switch_item, null);
-    Switch switch_dark_mode;
-    private boolean isNavigationItemSelected = false;
     AlertDialog.Builder builder;
 
     @Override
@@ -61,23 +60,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportActionBar().setTitle("Home");
         }
 
-//        switch_dark_mode = switchLayout.findViewById(R.id.switch_dark_mode);
+        Menu menu = navigationView.getMenu();
+        MenuItem menuItem = menu.findItem(R.id.nav_dark);
+        Switch darkSwitch = menuItem.getActionView().findViewById(R.id.switch_dark_mode);
 
-//        switch_dark_mode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            if (isChecked) {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        darkSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 //                recreate();
-//                Toast.makeText(MainActivity.this, "Dark Mode On", Toast.LENGTH_SHORT).show();
-//            } else {
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                Toast.makeText(MainActivity.this, "Dark Mode Activated", Toast.LENGTH_SHORT).show();
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 //                recreate();
-//                Toast.makeText(MainActivity.this, "Dark Mode Off", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+                Toast.makeText(MainActivity.this, "Dark Mode Deactivated", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         bottom_nav = findViewById(R.id.bottomNav);
         bottom_nav.setOnItemSelectedListener(item -> {
-//            if (isNavigationItemSelected) {
                 switch (item.getItemId()) {
                     case R.id.nav_home:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
@@ -99,8 +99,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         getSupportActionBar().setTitle("My Profile");
                         break;
                 }
-//            }
-//            isNavigationItemSelected = false;
             return true;
         });
 
@@ -110,8 +108,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        isNavigationItemSelected = true;
         switch (item.getItemId()) {
+//            case R.id.nav_dark:
+//                //activate dark mode with switch
+//                Toast.makeText(this, "Dark Mode", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 getSupportActionBar().setTitle("Home");

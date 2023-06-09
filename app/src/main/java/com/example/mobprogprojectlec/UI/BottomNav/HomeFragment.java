@@ -2,6 +2,7 @@ package com.example.mobprogprojectlec.UI.BottomNav;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -80,6 +81,11 @@ public class HomeFragment extends Fragment {
         albumRV = view.findViewById(R.id.albumRV);
         songRV = view.findViewById(R.id.songRV);
 
+        allReview.setText("All Review →");
+        allArtist.setText("All Artist →");
+        allAlbum.setText("All Album →");
+        allSong.setText("All Song →");
+
         allReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +118,20 @@ public class HomeFragment extends Fragment {
                 getActivity().setTitle("Song");
             }
         });
+
+        int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            allReview.setTextColor(getResources().getColor(R.color.brown_3));
+            allArtist.setTextColor(getResources().getColor(R.color.brown_3));
+            allAlbum.setTextColor(getResources().getColor(R.color.brown_3));
+            allSong.setTextColor(getResources().getColor(R.color.brown_3));
+        } else {
+            allReview.setTextColor(getResources().getColor(R.color.brown_1));
+            allArtist.setTextColor(getResources().getColor(R.color.brown_1));
+            allAlbum.setTextColor(getResources().getColor(R.color.brown_1));
+            allSong.setTextColor(getResources().getColor(R.color.brown_1));
+        }
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("username", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
