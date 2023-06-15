@@ -51,7 +51,7 @@ public class BoardingActivity extends AppCompatActivity {
             }
         });
 
-        String songUrl = "https://mocki.io/v1/f5140d70-7614-45d6-83ee-694240fa12f0";
+        String songUrl = "https://mocki.io/v1/0b0a7e10-88e4-4703-87a2-0af24af18203";
 
         songHelper = new SongHelper(this);
         artistHelper = new ArtistHelper(this);
@@ -98,9 +98,10 @@ public class BoardingActivity extends AppCompatActivity {
                         String title = songObject.getString("title");
                         String genre = songObject.getString("genre");
                         String preview = songObject.getString("preview");
+                        String spotify = songObject.getString("spotify");
 
                         if (!songHelper.validateSong(title, artistId, albumId)) {
-                            songHelper.insertSong(title, artistId, albumId, genre, preview);
+                            songHelper.insertSong(title, artistId, albumId, genre, preview, spotify);
                         }
                     }
                 }

@@ -25,6 +25,8 @@
         android:layout_height="wrap_content"
         android:text="Login to Peanut Butter n Jelly App"
         android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="20dp"
         android:layout_marginTop="10dp"
         android:textStyle="italic"
         android:textColor="@color/brown_3"/>

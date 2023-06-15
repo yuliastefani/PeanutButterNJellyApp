@@ -10,11 +10,11 @@
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/peabut_n_jelly"
-        android:layout_marginTop="20dp"
+        android:layout_height="350dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginHorizontal="10dp"/>
+        android:layout_marginHorizontal="10dp"
+        android:layout_below="@+id/tvWelcome"
+        android:src="@drawable/peabut_n_jelly" />
 
     <TextView
         android:id="@+id/tvWelcome"
@@ -46,8 +46,7 @@
         android:layout_centerHorizontal="true"
         android:text="Get Started"
         android:textSize="18sp"
-        android:layout_below="@id/tvDescription"
-        android:layout_marginTop="350dp"
+        android:layout_below="@id/ivLogo"
         android:background="@drawable/rounded_button"
         android:textColor="@android:color/white" />
 

@@ -13,14 +13,16 @@ public class Song implements Parcelable {
     private int albumId;
     private String genre;
     private String preview;
+    private String spotify;
 
-    public Song(int id, String title, int artistId, int albumId, String genre, String preview) {
+    public Song(int id, String title, int artistId, int albumId, String genre, String preview, String spotify) {
         this.id = id;
         this.title = title;
         this.artistId = artistId;
         this.albumId = albumId;
         this.genre = genre;
         this.preview = preview;
+        this.spotify = spotify;
     }
 
     public int getId() {
@@ -71,6 +73,14 @@ public class Song implements Parcelable {
         this.preview = preview;
     }
 
+    public String getSpotify() {
+        return spotify;
+    }
+
+    public void setSpotify(String spotify) {
+        this.spotify = spotify;
+    }
+
     protected Song(Parcel in) {
         id = in.readInt();
         title = in.readString();
@@ -78,6 +88,7 @@ public class Song implements Parcelable {
         albumId = in.readInt();
         genre = in.readString();
         preview = in.readString();
+        spotify = in.readString();
     }
 
     public static final Creator<Song> CREATOR = new Creator<Song>() {
@@ -105,5 +116,6 @@ public class Song implements Parcelable {
         dest.writeInt(albumId);
         dest.writeString(genre);
         dest.writeString(preview);
+        dest.writeString(spotify);
     }
 }

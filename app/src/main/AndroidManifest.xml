@@ -23,8 +23,10 @@
             android:theme="@style/Theme.MobProgProjectLEC.NoActionBar"/>
         <activity
             android:name=".UI.NavBar.SongDetailActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MobProgProjectLEC.NoActionBar"/>
+            android:exported="true"
+            android:theme="@style/Theme.MobProgProjectLEC.NoActionBar">
+
+        </activity>
         <activity
             android:name=".UI.Landing.RegisterActivity"
             android:exported="false" />

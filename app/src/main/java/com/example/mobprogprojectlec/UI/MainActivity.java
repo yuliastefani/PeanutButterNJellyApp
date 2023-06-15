@@ -67,11 +67,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         darkSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                recreate();
                 Toast.makeText(MainActivity.this, "Dark Mode Activated", Toast.LENGTH_SHORT).show();
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                recreate();
                 Toast.makeText(MainActivity.this, "Dark Mode Deactivated", Toast.LENGTH_SHORT).show();
             }
         });

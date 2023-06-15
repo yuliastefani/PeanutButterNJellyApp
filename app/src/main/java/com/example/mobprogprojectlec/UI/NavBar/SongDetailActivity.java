@@ -2,9 +2,11 @@ package com.example.mobprogprojectlec.UI.NavBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +36,7 @@ public class SongDetailActivity extends AppCompatActivity {
     public static final String detSong = "detSong";
     Vector<Song> vSong;
     TextView songTitle, songArtist, songGenre;
-    ImageView albumImage, albumImageBack, includedLayout;
+    ImageView albumImage, albumImageBack, includedLayout, spotifyIcon;
     RatingBar songRating;
     EditText songComment;
     ToggleButton playPauseButton;
@@ -49,6 +51,7 @@ public class SongDetailActivity extends AppCompatActivity {
 
         albumImage = findViewById(R.id.albumImage);
         albumImageBack = findViewById(R.id.albumImageBack);
+        spotifyIcon = findViewById(R.id.spotifyIcon);
         songTitle = findViewById(R.id.songTitle);
         songArtist = findViewById(R.id.songArtist);
         songGenre = findViewById(R.id.songGenre);
@@ -77,6 +80,26 @@ public class SongDetailActivity extends AppCompatActivity {
             songTitle.setText(song.getTitle());
             songArtist.setText(artist.getName());
             songGenre.setText(song.getGenre());
+
+            spotifyIcon.setOnClickListener(v -> {
+                String url = song.getSpotify();
+                String songUrl = "spotify:track:" + url;
+
+                Intent spotifyIntent = new Intent(Intent.ACTION_VIEW);
+                spotifyIntent.setData(Uri.parse(songUrl));
+                spotifyIntent.setPackage("com.spotify.music");
+
+                if (spotifyIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(spotifyIntent);
+                }
+                else {
+                    Intent webIntent = new Intent(Intent.ACTION_VIEW);
+                    webIntent.setData(Uri.parse("https://open.spotify.com/track/" + url));
+                    startActivity(webIntent);
+                }
+
+                Toast.makeText(this, "Opening Spotify", Toast.LENGTH_SHORT).show();
+            });
 
             try {
                 mediaPlayer.setDataSource(song.getPreview());

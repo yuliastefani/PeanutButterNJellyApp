@@ -41,7 +41,7 @@ public class SongHelper {
         }
 
         Song s;
-        String tempSongTitle, tempGenre, tempPreview;
+        String tempSongTitle, tempGenre, tempPreview, tempSpotify;
         Integer tempID, tempArtistID, tempAlbumID;
 
         tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
@@ -50,13 +50,14 @@ public class SongHelper {
         tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
         tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
         tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
+        tempSpotify = cursor.getString(cursor.getColumnIndexOrThrow("spotify"));
 
-        s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
+        s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview, tempSpotify);
 
         return s;
     }
 
-    public void insertSong(String songTitle, Integer artistId, Integer albumId, String genre, String preview) {
+    public void insertSong(String songTitle, Integer artistId, Integer albumId, String genre, String preview, String spotify) {
         String selectMaxIdQuery = "SELECT MAX(id) FROM Song";
         Cursor cursor = db.rawQuery(selectMaxIdQuery, null);
         int maxId = 0;
@@ -75,6 +76,7 @@ public class SongHelper {
         contentValues.put("album_id", albumId);
         contentValues.put("genre", genre);
         contentValues.put("preview", preview);
+        contentValues.put("spotify", spotify);
 
         db.insert(table, null, contentValues);
     }
@@ -95,7 +97,7 @@ public class SongHelper {
         cursor.moveToFirst();
 
         Song s;
-        String tempSongTitle, tempGenre, tempPreview;
+        String tempSongTitle, tempGenre, tempPreview, tempSpotify;
         Integer tempID, tempArtistID, tempAlbumID;
 
         if (cursor.getCount() > 0) {
@@ -106,8 +108,9 @@ public class SongHelper {
                 tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
                 tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
                 tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
+                tempSpotify = cursor.getString(cursor.getColumnIndexOrThrow("spotify"));
 
-                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
+                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview, tempSpotify);
 
                 songVector.add(s);
                 cursor.moveToNext();
@@ -128,7 +131,7 @@ public class SongHelper {
         }
 
         Song s;
-        String tempSongTitle, tempGenre, tempPreview;
+        String tempSongTitle, tempGenre, tempPreview, tempSpotify;
         Integer tempID, tempArtistID, tempAlbumID;
 
         tempID = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
@@ -137,8 +140,9 @@ public class SongHelper {
         tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
         tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
         tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
+        tempSpotify = cursor.getString(cursor.getColumnIndexOrThrow("spotify"));
 
-        s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
+        s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview, tempSpotify);
 
         return s;
     }
@@ -151,7 +155,7 @@ public class SongHelper {
         cursor.moveToFirst();
 
         Song s;
-        String tempSongTitle, tempGenre, tempPreview;
+        String tempSongTitle, tempGenre, tempPreview, tempSpotify;
         Integer tempID, tempArtistID, tempAlbumID;
 
         if (cursor.getCount() > 0) {
@@ -162,8 +166,9 @@ public class SongHelper {
                 tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
                 tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
                 tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
+                tempSpotify = cursor.getString(cursor.getColumnIndexOrThrow("spotify"));
 
-                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
+                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview, tempSpotify);
 
                 songVector.add(s);
                 cursor.moveToNext();
@@ -185,7 +190,7 @@ public class SongHelper {
         cursor.moveToFirst();
 
         Song s;
-        String tempSongTitle, tempGenre, tempPreview;
+        String tempSongTitle, tempGenre, tempPreview, tempSpotify;
         Integer tempID, tempArtistID, tempAlbumID;
 
         if (cursor.getCount() > 0) {
@@ -196,8 +201,9 @@ public class SongHelper {
                 tempAlbumID = cursor.getInt(cursor.getColumnIndexOrThrow("album_id"));
                 tempGenre = cursor.getString(cursor.getColumnIndexOrThrow("genre"));
                 tempPreview = cursor.getString(cursor.getColumnIndexOrThrow("preview"));
+                tempSpotify = cursor.getString(cursor.getColumnIndexOrThrow("spotify"));
 
-                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview);
+                s = new Song(tempID, tempSongTitle, tempArtistID, tempAlbumID, tempGenre, tempPreview, tempSpotify);
 
                 songVector.add(s);
                 cursor.moveToNext();

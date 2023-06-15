@@ -22,6 +22,7 @@
                 android:id="@+id/albumImage"
                 android:layout_width="wrap_content"
                 android:layout_height="175dp"
+                android:layout_centerHorizontal="true"
                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
             <TextView
