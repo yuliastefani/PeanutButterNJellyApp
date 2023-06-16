@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuItem menuItem = menu.findItem(R.id.nav_dark);
         Switch darkSwitch = menuItem.getActionView().findViewById(R.id.switch_dark_mode);
 
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            darkSwitch.setChecked(true);
+        }
+
         darkSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

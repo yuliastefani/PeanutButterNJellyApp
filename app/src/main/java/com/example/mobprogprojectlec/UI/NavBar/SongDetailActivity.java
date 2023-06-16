@@ -24,17 +24,13 @@ import com.example.mobprogprojectlec.Database.ReviewHelper;
 import com.example.mobprogprojectlec.Database.UserHelper;
 import com.example.mobprogprojectlec.Model.Album;
 import com.example.mobprogprojectlec.Model.Artist;
-import com.example.mobprogprojectlec.Model.Review;
 import com.example.mobprogprojectlec.Model.Song;
 import com.example.mobprogprojectlec.Model.User;
 import com.example.mobprogprojectlec.R;
 
-import java.util.Vector;
-
 public class SongDetailActivity extends AppCompatActivity {
 
     public static final String detSong = "detSong";
-    Vector<Song> vSong;
     TextView songTitle, songArtist, songGenre;
     ImageView albumImage, albumImageBack, includedLayout, spotifyIcon;
     RatingBar songRating;
@@ -120,9 +116,7 @@ public class SongDetailActivity extends AppCompatActivity {
                 }
             });
 
-            mediaPlayer.setOnCompletionListener(mp -> {
-                playPauseButton.setChecked(false);
-            });
+            mediaPlayer.setOnCompletionListener(mp -> playPauseButton.setChecked(false));
 
             reviewButton.setOnClickListener(v -> {
                 if(validate()){
@@ -148,9 +142,7 @@ public class SongDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         }
 
-        backBtn.setOnClickListener(v -> {
-            finish();
-        });
+        backBtn.setOnClickListener(v -> finish());
 
         includedLayout = findViewById(R.id.includedLayout);
         int nightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;

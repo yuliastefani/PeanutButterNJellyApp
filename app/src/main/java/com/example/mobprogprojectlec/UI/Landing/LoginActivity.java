@@ -69,9 +69,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         userHelper.open();
         Boolean checkUser = userHelper.validateUser(etLgUsername.getText().toString(), etLgPassword.getText().toString());
+        Boolean checkUsername = userHelper.validateUsername(etLgUsername.getText().toString());
         userHelper.close();
+
+        if (checkUsername == true && checkUser == false){
+            etLgPassword.setError("Wrong Password!");
+            return false;
+        }
+
         if (checkUser == false){
             etLgUsername.setError("Username and Password are not found, Please Register First!");
+            etLgPassword.setError("Username and Password are not found, Please Register First!");
             return false;
         }
         return true;

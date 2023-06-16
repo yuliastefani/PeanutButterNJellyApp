@@ -1,12 +1,14 @@
 package com.example.mobprogprojectlec.UI.BottomNav;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import com.example.mobprogprojectlec.Database.UserHelper;
 import com.example.mobprogprojectlec.Model.Review;
 import com.example.mobprogprojectlec.Model.Song;
 import com.example.mobprogprojectlec.R;
+import com.example.mobprogprojectlec.UI.NavBar.SongDetailActivity;
 
 import java.util.Vector;
 
@@ -29,7 +32,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
     Vector<Review> vReview;
     SongHelper songHelper;
     UserHelper userHelper;
-    Song song;
+    Song song, song2;
 
     public FeedAdapter(Context ctx, Vector<Review> vReview) {
         this.ctx = ctx;
@@ -132,6 +135,17 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
             holder.albumName.setTextColor(ctx.getResources().getColor(R.color.brown_1));
         }
 
+        holder.rlDet.setOnClickListener(v -> {
+            songHelper = new SongHelper(ctx);
+            songHelper.open();
+            song2 = songHelper.fetchSong(review.getSongId());
+            songHelper.close();
+
+            Intent intent = new Intent(ctx, SongDetailActivity.class);
+            intent.putExtra(SongDetailActivity.detSong, song2);
+            ctx.startActivity(intent);
+        });
+
     }
 
     @Override
@@ -142,6 +156,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView usernameID, timeAdded, songReview, songRating, songTitle, songArtist, albumName;
         ImageView albumImage;
+        RelativeLayout rlDet;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             usernameID = itemView.findViewById(R.id.usernameID);
@@ -152,6 +167,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>{
             songArtist = itemView.findViewById(R.id.songArtist);
             albumName = itemView.findViewById(R.id.albumName);
             albumImage = itemView.findViewById(R.id.albumImage);
+            rlDet = itemView.findViewById(R.id.rlDet);
         }
     }
 }

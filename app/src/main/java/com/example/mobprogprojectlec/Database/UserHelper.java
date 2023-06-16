@@ -128,6 +128,17 @@ public class UserHelper {
         }
     }
 
+    public boolean checkUsername(String username){
+        String search = "Select * from user where username = ?";
+        Cursor cursor = db.rawQuery(search,new String[]{username});
+        if(cursor.getCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public User getUser(String username){
         String view = "Select * from User where username= ? limit 1";
 
